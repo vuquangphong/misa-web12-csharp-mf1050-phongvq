@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32002.185
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MISA.Fresher.Web12", "MISA.Fresher.Web12\MISA.Fresher.Web12.csproj", "{BCF1CB95-A15A-4803-A54D-3623C8F62A0B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCF1CB95-A15A-4803-A54D-3623C8F62A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCF1CB95-A15A-4803-A54D-3623C8F62A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCF1CB95-A15A-4803-A54D-3623C8F62A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCF1CB95-A15A-4803-A54D-3623C8F62A0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E3796BC8-C2AD-45AF-83B1-426F279A5DE7}
+	EndGlobalSection
+EndGlobal
