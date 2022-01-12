@@ -50,5 +50,9 @@
         public DateTime? DateOfBirth { get; set; }
 
         #endregion
+
+        #region Method
+
+        #endregion
     }
 }
