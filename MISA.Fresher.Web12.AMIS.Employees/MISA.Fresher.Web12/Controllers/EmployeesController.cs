@@ -10,6 +10,10 @@ namespace MISA.Fresher.Web12.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
+        /// <summary>
+        /// @desc: Get the Info of Database Connection
+        /// @author: Vũ Quang Phong (11/01/2022)
+        /// </summary>
         private string getConnectionString()
         {
             DotNetEnv.Env.Load();
@@ -28,33 +32,44 @@ namespace MISA.Fresher.Web12.Controllers
         }
 
         /// <summary>
-        /// GET the Info of all Employees...
+        /// @method: GET /Employees
+        /// @desc: Get the Info of all Employees
+        /// @author: Vũ Quang Phong (11/01/2022)
         /// </summary>
         /// <returns>
-        /// An array of Employees...
+        /// An array of Employees
         /// </returns>
         [HttpGet]
         public IEnumerable<Employee> Get()
         {
-            // Declare the info of Database
-            string connectionString = getConnectionString();
+            try
+            {
+                // Declare the info of Database
+                string connectionString = getConnectionString();
 
-            // Initital Connection
-            var sqlConnection = new MySqlConnection(connectionString);
+                // Initital Connection
+                var sqlConnection = new MySqlConnection(connectionString);
 
-            // Query data in database
-            var employees = sqlConnection.Query<Employee>("SELECT * FROM Employee");
+                // Query data in database
+                var employees = sqlConnection.Query<Employee>("SELECT * FROM Employee");
 
-            // Return response
-            return employees;
+                return employees;
+            }
+            catch (Exception ex)
+            {
+                return (IEnumerable<Employee>)StatusCode(500, ex.Message);
+            }
+            
         }
 
         /// <summary>
-        /// GET the Info of an Employee by Id
+        /// @method: GET /Employees/{employeeId}
+        /// @desc: Ge tthe Info of an Employee by Id
+        /// @author: Vũ Quang Phong (11/01/2022)
         /// </summary>
         /// <param name="employeeId"></param>
         /// <returns>
-        /// An Employee
+        /// The Employee corresponding
         /// </returns>
         [HttpGet("{employeeId}")]
         public Employee Get(string employeeId)
@@ -72,7 +87,6 @@ namespace MISA.Fresher.Web12.Controllers
 
             var employee = sqlConnection.QueryFirstOrDefault<Employee>(sqlQuery, param: dynamicParameters);
 
-            // Return response
             return employee;
         }
     }

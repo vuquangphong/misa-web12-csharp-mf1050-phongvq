@@ -1,8 +1,8 @@
 ﻿namespace MISA.Fresher.Web12.Models
 {
     /// <summary>
-    /// Model of Employees
-    /// Author: Vũ Quang Phong (11/01/2022)
+    /// @desc: Model of Employees
+    /// @author: Vũ Quang Phong (11/01/2022)
     /// </summary>
     public class Employee
     {
@@ -14,6 +14,7 @@
         #endregion
 
         #region Properties
+
         // Primary Key
         public Guid EmployeeId { get; set; }
 
@@ -31,8 +32,8 @@
 
         /// <summary>
         /// Gender of Employee
-        /// Gender = 0: Female
-        /// Gender = 1: Male
+        /// Gender = 0 --> Female
+        /// Gender = 1 --> Male
         /// </summary>
         public int? Gender { get; set; }
 
@@ -47,6 +48,7 @@
 
         // Date of birth of Employee
         public DateTime? DateOfBirth { get; set; }
+
         #endregion
     }
 }
