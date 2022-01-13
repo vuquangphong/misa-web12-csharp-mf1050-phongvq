@@ -46,7 +46,7 @@ namespace MISA.Fresher.Web12.Controllers
         /// An array of Employees
         /// </returns>
         [HttpGet]
-        public IEnumerable<Employee> Get()
+        public IActionResult Get()
         {
             try
             {
@@ -59,18 +59,36 @@ namespace MISA.Fresher.Web12.Controllers
                 // Query data in database
                 var employees = sqlConnection.Query<Employee>("SELECT * FROM Employee");
 
-                return employees;
+                // Response
+                if (employees == null)
+                {
+                    var res = new
+                    {
+                        devMsg = "No data",
+                        userMsg = "Dữ liệu chưa có nhân viên nào!",
+                    };
+                    return StatusCode(404, res);
+                    //return NotFound(res); ~ It's OKAY!
+                }
+                return StatusCode(200, employees);
+                //return Ok(employees); ~ It's OKAY!
+
             }
             catch (Exception ex)
             {
-                return (IEnumerable<Employee>)StatusCode(500, ex.Message);
+                var res = new
+                {
+                    devMsg = ex.Message,
+                    userMsg = "Đã có lỗi xảy ra, vui lòng liên hệ với MISA!",
+                };
+                return StatusCode(500, res);
             }
             
         }
 
         /// <summary>
         /// @method: GET /Employees/{employeeId}
-        /// @desc: Ge tthe Info of an Employee by Id
+        /// @desc: Get the Info of an Employee by Id
         /// @author: Vũ Quang Phong (11/01/2022)
         /// </summary>
         /// <param name="employeeId"></param>
@@ -78,22 +96,44 @@ namespace MISA.Fresher.Web12.Controllers
         /// The Employee corresponding
         /// </returns>
         [HttpGet("{employeeId}")]
-        public Employee Get(string employeeId)
+        public IActionResult Get(string employeeId)
         {
-            // Declare the info of Database
-            string connectionString = getConnectionString();
+            try
+            {
+                // Declare the info of Database
+                string connectionString = getConnectionString();
 
-            // Initital Connection
-            var sqlConnection = new MySqlConnection(connectionString);
+                // Initital Connection
+                var sqlConnection = new MySqlConnection(connectionString);
+                var dynamicParams = new DynamicParameters();
+                dynamicParams.Add("@EmployeeId", employeeId);
 
-            // Query data in database
-            var sqlQuery = "SELECT * FROM Employee WHERE EmployeeId = @EmployeeId";
-            var dynamicParams = new DynamicParameters();
-            dynamicParams.Add("@EmployeeId", employeeId);
+                // Query data in database
+                var sqlQuery = "SELECT * FROM Employee WHERE EmployeeId = @EmployeeId";
+                var employee = sqlConnection.QueryFirstOrDefault<Employee>(sqlQuery, param: dynamicParams);
 
-            var employee = sqlConnection.QueryFirstOrDefault<Employee>(sqlQuery, param: dynamicParams);
+                // Response
+                if (employee == null)
+                {
+                    var res = new
+                    {
+                        devMsg = "Database does not have this EmployeeId",
+                        userMsg = "Dữ liệu không có nhân viên này",
+                    };
+                    return StatusCode(404, res);
+                }
+                return StatusCode(200, employee);
 
-            return employee;
+            }
+            catch (Exception ex)
+            {
+                var res = new
+                {
+                    devMsg = ex.Message,
+                    userMsg = "Đã có lỗi xảy ra, vui lòng liên hệ với MISA!",
+                };
+                return StatusCode(500, res);
+            }
         }
 
         /// <summary>
@@ -108,58 +148,105 @@ namespace MISA.Fresher.Web12.Controllers
         [HttpPost]
         public IActionResult Post(Employee _employee)
         {
-            // Create EmployeeId
-            _employee.EmployeeId = new Guid();
-
-            // Validate data from request
-            var properties = _employee.GetType().GetProperties();
-            var dynamicParams = new DynamicParameters();
-
-            foreach (var property in properties)
+            try
             {
-                var propertyName = property.Name;
-                var propertyValue = property.GetValue(_employee);
-                var propertyType = property.PropertyType;
+                // Declare the info of Database
+                string connectionString = getConnectionString();
 
-                if (propertyType == typeof(Guid) || propertyType == typeof(Guid?))
+                // Initital Connection
+                var sqlConnection = new MySqlConnection(connectionString);
+                var dynamicParams = new DynamicParameters();
+
+                // Create EmployeeId
+                _employee.EmployeeId = Guid.NewGuid();
+
+                // Validate data from request
+                // 1. Handling empty EmployeeCode
+                if (string.IsNullOrEmpty(_employee.EmployeeCode))
                 {
-                    dynamicParams.Add($"@{propertyName}", propertyValue, DbType.String);
+                    var res = new
+                    {
+                        devMsg = "Empty EmployeeCode!",
+                        userMsg = "Mã nhân viên không được phép để trống!",
+                    };
+                    return StatusCode(400, res);
+                    //return BadRequest(res); => It's OKAY!
                 }
-                else
+
+                // 2. Handling duplicate EmployeeCode
+                dynamicParams.Add("@EmployeeCode", _employee.EmployeeCode);
+                var sqlCheck = "SELECT EmployeeCode FROM Employee WHERE EmployeeCode = @EmployeeCode";
+                var isExist = sqlConnection.QueryFirstOrDefault(sqlCheck, param: dynamicParams);
+
+                if (isExist == null)
                 {
-                    dynamicParams.Add($"@{propertyName}", propertyValue);
+                    var res = new
+                    {
+                        devMsg = "Duplicate EmployeeCode!",
+                        userMsg = "Mã nhân viên này đã tồn tại, vui lòng nhập lại!",
+                    };
+                    return StatusCode(400, res);
                 }
+
+                // 3. Handling empty FullName
+                if (string.IsNullOrEmpty(_employee.FullName))
+                {
+                    var res = new
+                    {
+                        devMsg = "Empty FullName!",
+                        userMsg = "Tên nhân viên không được phép để trống!",
+                    };
+                    return StatusCode(400, res);
+                }
+
+                // Everything OK
+                // Create Dynamic Params
+                var properties = _employee.GetType().GetProperties();
+
+                foreach (var property in properties)
+                {
+                    var propertyName = property.Name;
+                    var propertyValue = property.GetValue(_employee);
+                    var propertyType = property.PropertyType;
+
+                    if (propertyType == typeof(Guid) || propertyType == typeof(Guid?))
+                    {
+                        dynamicParams.Add($"@{propertyName}", propertyValue, DbType.String);
+                    }
+                    else
+                    {
+                        dynamicParams.Add($"@{propertyName}", propertyValue);
+                    }
+                }
+
+                // Query data in database
+                var sqlQuery = "" +
+                    "INSERT INTO " +
+                    "Employee(EmployeeId, EmployeeCode, FirstName, LastName, FullName, Gender, " +
+                        "PhoneNumber, Email, Address, DateOfBirth)" +
+                    "VALUES(@EmployeeId, @EmployeeCode, @FirstName, @LastName, @FullName, @Gender, " +
+                        "@PhoneNumber, @Email, @Address, @DateOfBirth)";
+
+                var rowEffects = sqlConnection.Execute(sqlQuery, param: dynamicParams);
+
+                // Response
+                if (rowEffects > 0)
+                {
+                    return StatusCode(201, rowEffects);
+                    //return Created(rowEffects); ~ It's OKAY!
+                }
+                return NoContent();
+
             }
-
-            // Declare the info of Database
-            string connectionString = getConnectionString();
-
-            // Initital Connection
-            var sqlConnection = new MySqlConnection(connectionString);
-
-            // Query data in database
-            var sqlQuery = "" +
-                "INSERT INTO " +
-                "Employee(EmployeeId, EmployeeCode, FirstName, LastName, FullName, Gender, " +
-                    "PhoneNumber, Email, Address, DateOfBirth)" +
-                "VALUES(@EmployeeId, @EmployeeCode, @FirstName, @LastName, @FullName, @Gender, " +
-                    "@PhoneNumber, @Email, @Address, @DateOfBirth)";
-
-            var insertAction = sqlConnection.Query<Employee>(sqlQuery, param: dynamicParams);
-
-            return Created("201", insertAction);
-
-            //var rowEffects = sqlConnection.Execute("Proc_InsertCustomer", dynamicParams, commandType: CommandType.Text);
-
-            //if (rowEffects > 0)
-            //{
-            //    return Created("201", _employee);
-            //}
-            //else
-            //{
-            //    return NoContent();
-            //}
-
+            catch (Exception ex)
+            {
+                var res = new
+                {
+                    devMsg = ex.Message,
+                    userMsg = "Đã có lỗi xảy ra, vui lòng liên hệ với MISA!",
+                };
+                return StatusCode(500, res);
+            }
         }
 
         /// <summary>
@@ -175,43 +262,96 @@ namespace MISA.Fresher.Web12.Controllers
         [HttpPut("{employeeId}")]
         public IActionResult Put(string employeeId, Employee _employee)
         {
-            // Validate data from request
-            var properties = _employee.GetType().GetProperties();
-            var dynamicParams = new DynamicParameters();
-
-            foreach (var property in properties)
+            try
             {
-                var propertyName = property.Name;
-                var propertyValue = property.GetValue(_employee);
-                var propertyType = property.PropertyType;
+                // Declare the info of Database
+                string connectionString = getConnectionString();
 
-                if (propertyType == typeof(Guid) || propertyType == typeof(Guid?))
+                // Initital Connection
+                var sqlConnection = new MySqlConnection(connectionString);
+                var dynamicParams = new DynamicParameters();
+
+                // Validate data from request
+                // 1. Handling empty EmployeeCode
+                if (string.IsNullOrEmpty(_employee.EmployeeCode))
                 {
-                    dynamicParams.Add($"@{propertyName}", propertyValue, DbType.String);
+                    var res = new
+                    {
+                        devMsg = "Empty EmployeeCode!",
+                        userMsg = "Mã nhân viên không được phép để trống!",
+                    };
+                    return StatusCode(400, res);
+                    //return BadRequest(res); => It's OKAY!
                 }
-                else
+
+                // 2. Handling duplicate EmployeeCode
+                dynamicParams.Add("@EmployeeCode", _employee.EmployeeCode);
+                var sqlCheck = "SELECT EmployeeCode FROM Employee WHERE EmployeeCode = @EmployeeCode";
+                var isExist = sqlConnection.QueryFirstOrDefault(sqlCheck, param: dynamicParams);
+
+                if (isExist == null)
                 {
-                    dynamicParams.Add($"@{propertyName}", propertyValue);
+                    var res = new
+                    {
+                        devMsg = "Duplicate EmployeeCode!",
+                        userMsg = "Mã nhân viên này đã tồn tại, vui lòng nhập lại!",
+                    };
+                    return StatusCode(400, res);
                 }
+
+                // 3. Handling empty FullName
+                if (string.IsNullOrEmpty(_employee.FullName))
+                {
+                    var res = new
+                    {
+                        devMsg = "Empty FullName!",
+                        userMsg = "Tên nhân viên không được phép để trống!",
+                    };
+                    return StatusCode(400, res);
+                }
+
+                // Everything OK
+                // Create Dynamic Params
+                var properties = _employee.GetType().GetProperties();
+
+                foreach (var property in properties)
+                {
+                    var propertyName = property.Name;
+                    var propertyValue = property.GetValue(_employee);
+                    var propertyType = property.PropertyType;
+
+                    if (propertyType == typeof(Guid) || propertyType == typeof(Guid?))
+                    {
+                        dynamicParams.Add($"@{propertyName}", propertyValue, DbType.String);
+                    }
+                    else
+                    {
+                        dynamicParams.Add($"@{propertyName}", propertyValue);
+                    }
+                }
+
+                // Query data in database
+                var sqlQuery = "" +
+                    "UPDATE Employee " +
+                    "SET EmployeeCode = @EmployeeCode, FirstName = @FirstName, LastName = @LastName, " +
+                        "FullName = @FullName, Gender = @Gender, PhoneNumber = @PhoneNumber, " +
+                        "Email = @Email, Address = @Address, DateOfBirth = @DateOfBirth " +
+                    "WHERE EmployeeId = @EmployeeId";
+
+                var updateAction = sqlConnection.QueryFirstOrDefault<Employee>(sqlQuery, param: dynamicParams);
+
+                return StatusCode(200, updateAction);
+
             }
-
-            // Declare the info of Database
-            string connectionString = getConnectionString();
-
-            // Initital Connection
-            var sqlConnection = new MySqlConnection(connectionString);
-
-            // Query data in database
-            var sqlQuery = "" +
-                "UPDATE Employee " +
-                "SET EmployeeCode = @EmployeeCode, FirstName = @FirstName, LastName = @LastName, " +
-                    "FullName = @FullName, Gender = @Gender, PhoneNumber = @PhoneNumber, " +
-                    "Email = @Email, Address = @Address, DateOfBirth = @DateOfBirth " +
-                "WHERE EmployeeId = @EmployeeId";
-
-            var updateAction = sqlConnection.QueryFirstOrDefault<Employee>(sqlQuery, param: dynamicParams);
-
-            return Created("201", updateAction);
+            catch (Exception ex)
+            {
+                var res = new
+                {
+                    devMsg = ex.Message,
+                    userMsg = "Đã có lỗi xảy ra, vui lòng liên hệ với MISA!",
+                };
+                return StatusCode(500, res);
+            }
         }
 
         /// <summary>
@@ -224,22 +364,39 @@ namespace MISA.Fresher.Web12.Controllers
         /// A Message
         /// </returns>
         [HttpDelete("{employeeId}")]
-        public string Delete(string employeeId)
+        public IActionResult Delete(string employeeId)
         {
-            // Declare the info of Database
-            string connectionString = getConnectionString();
+            try
+            {
+                // Declare the info of Database
+                string connectionString = getConnectionString();
 
-            // Initital Connection
-            var sqlConnection = new MySqlConnection(connectionString);
+                // Initital Connection
+                var sqlConnection = new MySqlConnection(connectionString);
+                var dynamicParams = new DynamicParameters();
+                dynamicParams.Add("@EmployeeId", employeeId);
 
-            // Query data in Database
-            var sqlQuery = "DELETE FROM Employee WHERE EmployeeId = @EmployeeId";
-            var dynamicParams = new DynamicParameters();
-            dynamicParams.Add("@EmployeeId", employeeId);
+                // Query data in Database
+                var sqlQuery = "DELETE FROM Employee WHERE EmployeeId = @EmployeeId";
+                var rowEffects = sqlConnection.Execute(sqlQuery, param: dynamicParams);
 
-            var deleteAction = sqlConnection.QueryFirstOrDefault<Employee>(sqlQuery, param: dynamicParams);
+                // Response
+                if (rowEffects > 0)
+                {
+                    return StatusCode(200, rowEffects);
+                }
+                return NoContent();
 
-            return "Delete hah?";
+            }
+            catch (Exception ex)
+            {
+                var res = new
+                {
+                    devMsg = ex.Message,
+                    userMsg = "Đã có lỗi xảy ra, vui lòng liên hệ với MISA!",
+                };
+                return StatusCode(500, res);
+            }
         }
 
         #endregion

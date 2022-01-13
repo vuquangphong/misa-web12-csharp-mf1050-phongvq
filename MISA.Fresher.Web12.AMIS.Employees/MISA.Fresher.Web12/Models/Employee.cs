@@ -19,7 +19,7 @@
         public Guid EmployeeId { get; set; }
 
         // Employee Code
-        public string EmployeeCode { get; set; }
+        public string? EmployeeCode { get; set; }
 
         // First name of Employee
         public string? FirstName { get; set; }
@@ -28,7 +28,7 @@
         public string? LastName { get; set; }
 
         // Full name of Employee
-        public string FullName { get; set; }
+        public string? FullName { get; set; }
 
         /// <summary>
         /// Gender of Employee
