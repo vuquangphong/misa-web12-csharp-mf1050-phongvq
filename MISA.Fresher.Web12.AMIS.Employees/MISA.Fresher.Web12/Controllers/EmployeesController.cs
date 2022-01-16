@@ -34,7 +34,6 @@ namespace MISA.Fresher.Web12.Controllers
         }
         #endregion
 
-
         #region Controllers
 
         /// <summary>
@@ -62,13 +61,13 @@ namespace MISA.Fresher.Web12.Controllers
                 // Response
                 if (employees == null)
                 {
-                    var res = new
-                    {
-                        devMsg = "No data",
-                        userMsg = "Dữ liệu chưa có nhân viên nào!",
-                    };
-                    return StatusCode(404, res);
-                    //return NotFound(res); ~ It's OKAY!
+                    //var res = new
+                    //{
+                    //    devMsg = "No data",
+                    //    userMsg = "Dữ liệu chưa có nhân viên nào!",
+                    //};
+                    return StatusCode(204);
+                    //return NoContent(); ~ It's OKAY!
                 }
                 return StatusCode(200, employees);
                 //return Ok(employees); ~ It's OKAY!
@@ -115,12 +114,7 @@ namespace MISA.Fresher.Web12.Controllers
                 // Response
                 if (employee == null)
                 {
-                    var res = new
-                    {
-                        devMsg = "Database does not have this EmployeeId",
-                        userMsg = "Dữ liệu không có nhân viên này",
-                    };
-                    return StatusCode(404, res);
+                    return StatusCode(204);
                 }
                 return StatusCode(200, employee);
 
