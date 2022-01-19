@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace MISA.Fresher.Web12.Core.Exceptions
 {
+    /// <summary>
+    /// @author: Vũ Quang Phong (18/01/2022)
+    /// @desc: Definition of MISA Exceptions
+    /// </summary>
     public class MISAValidateException : Exception
     {
         private string? msgErrValidate = null;

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MISA.Fresher.Web12.Core.Entities;
+using MISA.Fresher.Web12.Core.Exceptions;
 using MISA.Fresher.Web12.Core.Interfaces.Infrastructure;
 using MISA.Fresher.Web12.Core.Interfaces.Services;
 
@@ -10,15 +11,25 @@ namespace MISA.Fresher.Web12.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
+        // Dependency Injection
         private readonly IEmployeeRepositories _employeeRepositories;
         private readonly IEmployeeServices _employeeServices;
 
+        // Dependency Injection
         public EmployeesController(IEmployeeRepositories employeeRepositories, IEmployeeServices employeeServices)
         {
             _employeeRepositories = employeeRepositories;
             _employeeServices = employeeServices;
         }
 
+        /// <summary>
+        /// @method: GET /Employees
+        /// @desc: Get the Info of all Employees
+        /// @author: Vũ Quang Phong (19/01/2022)
+        /// </summary>
+        /// <returns>
+        /// An array of Employees
+        /// </returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -44,6 +55,15 @@ namespace MISA.Fresher.Web12.Controllers
             
         }
 
+        /// <summary>
+        /// @method: GET /Employees/{employeeId}
+        /// @desc: Get the Info of an Employee by Id
+        /// @author: Vũ Quang Phong (19/01/2022)
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <returns>
+        /// The Employee corresponding
+        /// </returns>
         [HttpGet("{employeeId}")]
         public IActionResult Get(string employeeId)
         {
@@ -68,7 +88,16 @@ namespace MISA.Fresher.Web12.Controllers
             }
         
         }
-        
+
+        /// <summary>
+        /// @method: POST /Employees
+        /// @desc: Insert a new Employee into Database
+        /// @author: Vũ Quang Phong (19/01/2022)
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns>
+        /// A Message (Success or Fail)
+        /// </returns>
         [HttpPost]
         public IActionResult Post(Employee employee)
         {
@@ -82,7 +111,7 @@ namespace MISA.Fresher.Web12.Controllers
                 }
                 return StatusCode(204);
             }
-            catch (MISAValidateExceptions ex)
+            catch (MISAValidateException ex)
             {
                 var res = new
                 {
@@ -101,7 +130,17 @@ namespace MISA.Fresher.Web12.Controllers
                 return StatusCode(500, res);
             }
         }
-       
+
+        /// <summary>
+        /// @method: PUT /Employees/{employeeId}
+        /// @desc: Update some Info of an Employee
+        /// @author: Vũ Quang Phong (19/01/2022)
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <param name="employeeId"></param>
+        /// <returns>
+        /// A Message (Success or Fail)
+        /// </returns>
         [HttpPut("{employeeId}")]
         public IActionResult Put(Employee employee ,string employeeId)
         {
@@ -115,7 +154,7 @@ namespace MISA.Fresher.Web12.Controllers
                 }
                 return StatusCode(204);
             }
-            catch (MISAValidateExceptions ex)
+            catch (MISAValidateException ex)
             {
                 var res = new
                 {
@@ -134,7 +173,16 @@ namespace MISA.Fresher.Web12.Controllers
                 return StatusCode(500, res);
             }
         }
-        
+
+        /// <summary>
+        /// @method: DELETE /Employees/{employeeId}
+        /// @desc: Remove an Employee by Id
+        /// @author: Vũ Quang Phong (19/01/2022)
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <returns>
+        /// A Message (Success or Fail)
+        /// </returns>
         [HttpDelete("{employeeId}")]
         public IActionResult Delete(string employeeId)
         {

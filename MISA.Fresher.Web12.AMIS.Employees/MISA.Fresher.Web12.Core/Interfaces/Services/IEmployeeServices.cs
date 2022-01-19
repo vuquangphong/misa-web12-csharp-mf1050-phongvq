@@ -10,7 +10,8 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Services
     public interface IEmployeeServices
     {
         /// <summary>
-        /// The Service for Adding a new Employee
+        /// @author: Vũ Quang Phong (18/01/2022)
+        /// @desc: The Service for Adding a new Employee
         /// </summary>
         /// <param name="employee"></param>
         /// <returns>
@@ -19,7 +20,8 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Services
         int InsertService(Employee employee);
 
         /// <summary>
-        /// The Service for Updating an Employee
+        /// @author: Vũ Quang Phong (18/01/2022)
+        /// @desc: The Service for Updating an Employee
         /// </summary>
         /// <param name="employee"></param>
         /// <param name="employeeId"></param>
