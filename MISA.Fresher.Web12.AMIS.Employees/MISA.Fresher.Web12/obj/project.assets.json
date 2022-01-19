@@ -4829,9 +4829,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\thapq\\MISA-TRAINING\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12\\MISA.Fresher.Web12.csproj",
-      "projectName": "MISA.Fresher.Web12",
-      "projectPath": "C:\\Users\\thapq\\MISA-TRAINING\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12\\MISA.Fresher.Web12.csproj",
+      "projectUniqueName": "C:\\Users\\thapq\\MISA-TRAINING\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12\\MISA.Fresher.Web12.Init.csproj",
+      "projectName": "MISA.Fresher.Web12.Init",
+      "projectPath": "C:\\Users\\thapq\\MISA-TRAINING\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12\\MISA.Fresher.Web12.Init.csproj",
       "packagesPath": "C:\\Users\\thapq\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\thapq\\MISA-TRAINING\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12\\obj\\",
       "projectStyle": "PackageReference",

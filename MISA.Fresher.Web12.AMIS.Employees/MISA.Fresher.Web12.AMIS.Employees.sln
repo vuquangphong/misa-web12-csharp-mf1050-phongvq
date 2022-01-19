@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32002.185
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MISA.Fresher.Web12", "MISA.Fresher.Web12\MISA.Fresher.Web12.csproj", "{BCF1CB95-A15A-4803-A54D-3623C8F62A0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MISA.Fresher.Web12.Init", "MISA.Fresher.Web12\MISA.Fresher.Web12.Init.csproj", "{BCF1CB95-A15A-4803-A54D-3623C8F62A0B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MISA.Fresher.Web12.Core", "MISA.Fresher.Web12.Core\MISA.Fresher.Web12.Core.csproj", "{84CE89B1-6E5E-4824-9C30-D54238E7C053}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MISA.Fresher.Web12.Infrastructure", "MISA.Fresher.Web12.Infrastructure\MISA.Fresher.Web12.Infrastructure.csproj", "{499EFB52-9557-423F-9E96-5AEAA5494555}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MISA.Fresher.Web12.Api", "MISA.Freser.Web12.Api\MISA.Fresher.Web12.Api.csproj", "{A29997AA-68FF-4121-95AC-9D3B9361AF20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{BCF1CB95-A15A-4803-A54D-3623C8F62A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCF1CB95-A15A-4803-A54D-3623C8F62A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCF1CB95-A15A-4803-A54D-3623C8F62A0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84CE89B1-6E5E-4824-9C30-D54238E7C053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84CE89B1-6E5E-4824-9C30-D54238E7C053}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84CE89B1-6E5E-4824-9C30-D54238E7C053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84CE89B1-6E5E-4824-9C30-D54238E7C053}.Release|Any CPU.Build.0 = Release|Any CPU
+		{499EFB52-9557-423F-9E96-5AEAA5494555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{499EFB52-9557-423F-9E96-5AEAA5494555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{499EFB52-9557-423F-9E96-5AEAA5494555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{499EFB52-9557-423F-9E96-5AEAA5494555}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A29997AA-68FF-4121-95AC-9D3B9361AF20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A29997AA-68FF-4121-95AC-9D3B9361AF20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A29997AA-68FF-4121-95AC-9D3B9361AF20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A29997AA-68FF-4121-95AC-9D3B9361AF20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

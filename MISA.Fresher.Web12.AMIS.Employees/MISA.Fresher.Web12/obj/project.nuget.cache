@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FGq7HFuqPgrnjy5RUAPz788mwzgtqTTHidGz1s3bxLiHm/anjIt+1jM1dTJMcnLS+UZ4dmZaR6FqhrCx838lUw==",
+  "dgSpecHash": "72a4ENFCTHjKamdFhgabspUJQ8+iiwFMMWl9ZHgjD09xF846Rf2UUKuffMyo0AVX1Ci20G9ctC0rq1CWyiSbjw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\thapq\\MISA-TRAINING\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12\\MISA.Fresher.Web12.csproj",
+  "projectFilePath": "C:\\Users\\thapq\\MISA-TRAINING\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12\\MISA.Fresher.Web12.Init.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thapq\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\thapq\\.nuget\\packages\\dotnetenv\\2.2.0\\dotnetenv.2.2.0.nupkg.sha512",

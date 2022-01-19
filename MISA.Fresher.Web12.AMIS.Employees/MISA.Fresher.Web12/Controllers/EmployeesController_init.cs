@@ -9,14 +9,14 @@ namespace MISA.Fresher.Web12.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class EmployeesController : ControllerBase
+    public class EmployeesController_init : ControllerBase
     {
         #region Support Methods
         /// <summary>
         /// @desc: Get the Info of Database Connection
         /// @author: Vũ Quang Phong (11/01/2022)
         /// </summary>
-        private string getConnectionString()
+        private static string GetConnectionString()
         {
             DotNetEnv.Env.Load();
             var _server = Environment.GetEnvironmentVariable("SERVER");
@@ -50,7 +50,7 @@ namespace MISA.Fresher.Web12.Controllers
             try
             {
                 // Declare the info of Database
-                string connectionString = getConnectionString();
+                string connectionString = GetConnectionString();
 
                 // Initital Connection
                 var sqlConnection = new MySqlConnection(connectionString);
@@ -100,7 +100,7 @@ namespace MISA.Fresher.Web12.Controllers
             try
             {
                 // Declare the info of Database
-                string connectionString = getConnectionString();
+                string connectionString = GetConnectionString();
 
                 // Initital Connection
                 var sqlConnection = new MySqlConnection(connectionString);
@@ -145,7 +145,7 @@ namespace MISA.Fresher.Web12.Controllers
             try
             {
                 // Declare the info of Database
-                string connectionString = getConnectionString();
+                string connectionString = GetConnectionString();
 
                 // Initital Connection
                 var sqlConnection = new MySqlConnection(connectionString);
@@ -172,7 +172,7 @@ namespace MISA.Fresher.Web12.Controllers
                 var sqlCheck = "SELECT EmployeeCode FROM Employee WHERE EmployeeCode = @EmployeeCode";
                 var isExist = sqlConnection.QueryFirstOrDefault(sqlCheck, param: dynamicParams);
 
-                if (isExist == null)
+                if (isExist != null)
                 {
                     var res = new
                     {
@@ -259,7 +259,7 @@ namespace MISA.Fresher.Web12.Controllers
             try
             {
                 // Declare the info of Database
-                string connectionString = getConnectionString();
+                string connectionString = GetConnectionString();
 
                 // Initital Connection
                 var sqlConnection = new MySqlConnection(connectionString);
@@ -363,7 +363,7 @@ namespace MISA.Fresher.Web12.Controllers
             try
             {
                 // Declare the info of Database
-                string connectionString = getConnectionString();
+                string connectionString = GetConnectionString();
 
                 // Initital Connection
                 var sqlConnection = new MySqlConnection(connectionString);

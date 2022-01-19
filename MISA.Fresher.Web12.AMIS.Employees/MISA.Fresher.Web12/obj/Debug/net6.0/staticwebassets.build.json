@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "bmjvhx0hKbRlMTL0X3UtNH7DALfXQTvZZU1DhTCeWeA=",
-  "Source": "MISA.Fresher.Web12",
-  "BasePath": "_content/MISA.Fresher.Web12",
+  "Hash": "8fgbnfoUoJfzsgPBjfDDcXAlKOQBgTtg01m6qAUfV6c=",
+  "Source": "MISA.Fresher.Web12.Init",
+  "BasePath": "_content/MISA.Fresher.Web12.Init",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

@@ -3,14 +3,29 @@
   "ProjectMap": {
     "bcf1cb95-a15a-4803-a54d-3623c8f62a0b": {
       "ProjectGuid": "bcf1cb95-a15a-4803-a54d-3623c8f62a0b",
-      "DisplayName": "MISA.Fresher.Web12",
+      "DisplayName": "MISA.Fresher.Web12.Init",
       "ColorIndex": 0
     },
     "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
       "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
       "DisplayName": "Miscellaneous Files",
       "ColorIndex": -1
+    },
+    "84ce89b1-6e5e-4824-9c30-d54238e7c053": {
+      "ProjectGuid": "84ce89b1-6e5e-4824-9c30-d54238e7c053",
+      "DisplayName": "MISA.Fresher.Web12.Core",
+      "ColorIndex": 1
+    },
+    "499efb52-9557-423f-9e96-5aeaa5494555": {
+      "ProjectGuid": "499efb52-9557-423f-9e96-5aeaa5494555",
+      "DisplayName": "MISA.Fresher.Web12.Infrastructure",
+      "ColorIndex": 2
+    },
+    "a29997aa-68ff-4121-95ac-9d3b9361af20": {
+      "ProjectGuid": "a29997aa-68ff-4121-95ac-9d3b9361af20",
+      "DisplayName": "MISA.Fresher.Web12.Api",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 4
 }
