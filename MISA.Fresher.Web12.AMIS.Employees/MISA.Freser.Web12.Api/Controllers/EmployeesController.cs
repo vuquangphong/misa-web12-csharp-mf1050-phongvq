@@ -90,6 +90,45 @@ namespace MISA.Fresher.Web12.Controllers
         }
 
         /// <summary>
+        /// @method: GET /Employees/filter?employeeFilter=...
+        /// @desc: Search for Employees by employeeFilter (code, name, phonenumber)
+        /// @author: Vũ Quang Phong (20/01/2022)
+        /// </summary>
+        /// <param name="employeeFilter"></param>
+        /// <returns>
+        /// An object contains the Number of Records & the Array of Employees
+        /// </returns>
+        [HttpGet("filter")]
+        public IActionResult GetByFilter(string? employeeFilter)
+        {
+            try
+            {
+                var employees = _employeeRepositories.GetByFilter(employeeFilter);
+
+                if (!employees.Any())
+                {
+                    return NoContent();
+                }
+
+                var res = new
+                {
+                    TotalRecord = employees.Count<Employee>(),
+                    Data = employees
+                };
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                var res = new
+                {
+                    devMsg = ex.Message,
+                    userMsg = "Đã có lỗi xảy ra, vui lòng liên hệ với MISA!",
+                };
+                return StatusCode(500, res);
+            }
+        }
+
+        /// <summary>
         /// @method: POST /Employees
         /// @desc: Insert a new Employee into Database
         /// @author: Vũ Quang Phong (19/01/2022)

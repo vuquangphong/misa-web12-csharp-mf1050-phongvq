@@ -32,6 +32,16 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Infrastructure
         public Employee GetById(string employeeId);
 
         /// <summary>
+        /// @author: Vũ Quang Phong (20/01/2022)
+        /// @desc: Search for Employees by Filter (code, name, phonenumber)
+        /// </summary>
+        /// <param name="employeeFilter"></param>
+        /// <returns>
+        /// An array of Employees
+        /// </returns>
+        public IEnumerable<Employee> GetByFilter(string employeeFilter);
+
+        /// <summary>
         /// @author: Vũ Quang Phong (19/01/2022)
         /// @desc: Inserting a new record into Employee Database
         /// </summary>

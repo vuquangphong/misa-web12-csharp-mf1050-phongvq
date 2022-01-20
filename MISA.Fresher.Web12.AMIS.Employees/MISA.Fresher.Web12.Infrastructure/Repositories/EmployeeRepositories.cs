@@ -74,6 +74,25 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
             return employee;
         }
 
+        public IEnumerable<Employee> GetByFilter(string employeeFilter)
+        {
+            // Connect to database
+            var sqlConnection = ConnectDatabase();
+
+            // Create dynamic parameters
+            var dynamicParams = new DynamicParameters();
+            dynamicParams.Add("@EmployeeFilter", $"%{employeeFilter}%");
+
+            // Query data in database
+            var sqlQuery = "SELECT * FROM Employee WHERE " +
+                "EmployeeCode LIKE @EmployeeFilter " +
+                "OR FullName LIKE @EmployeeFilter " +
+                "OR PhoneNumber LIKE @EmployeeFilter";
+            var employees = sqlConnection.Query<Employee>(sqlQuery, param: dynamicParams);
+
+            return employees;
+        }
+
         public int Insert(Employee employee)
         {
             // Connect to database
