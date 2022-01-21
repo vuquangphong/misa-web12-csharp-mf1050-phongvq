@@ -13,12 +13,12 @@ namespace MISA.Fresher.Web12.Core.Services
     public class EmployeeServices : IEmployeeServices
     {
         // Dependency Injection
-        private readonly IEmployeeRepositories _employeeRepositories;
+        private readonly IEmployeeRepository _employeeRepository;
 
         // Dependency Injection
-        public EmployeeServices(IEmployeeRepositories employeeRepositories)
+        public EmployeeServices(IEmployeeRepository employeeRepository)
         {
-            _employeeRepositories = employeeRepositories;
+            _employeeRepository = employeeRepository;
         }
 
         public int InsertService(Employee employee)
@@ -37,7 +37,7 @@ namespace MISA.Fresher.Web12.Core.Services
             }
 
             // 3. Handling duplicate EmployeeCode
-            if (_employeeRepositories.IsDuplicateEmployeeCode(employee.EmployeeCode))
+            if (_employeeRepository.IsDuplicateCode(employee.EmployeeCode))
             {
                 throw new MISAValidateException("Mã nhân viên này đã tồn tại, vui lòng nhập lại!");
             }
@@ -45,7 +45,7 @@ namespace MISA.Fresher.Web12.Core.Services
             // Everything is Okay!
             // Add a new Employee to Database
             employee.EmployeeId = Guid.NewGuid();
-            int rowsEffect = _employeeRepositories.Insert(employee);
+            int rowsEffect = _employeeRepository.Insert(employee);
 
             return rowsEffect;
         }
@@ -66,14 +66,14 @@ namespace MISA.Fresher.Web12.Core.Services
             }
 
             // 3. Handling duplicate EmployeeCode
-            if (_employeeRepositories.IsDuplicateEmployeeCode(employee.EmployeeCode))
+            if (_employeeRepository.IsDuplicateCode(employee.EmployeeCode))
             {
                 throw new MISAValidateException("Mã nhân viên này đã tồn tại, vui lòng nhập lại!");
             }
 
             // Everything is Okay!
             // Update an Employee in Database
-            int rowsEffect = _employeeRepositories.UpdateById(employee, employeeId);
+            int rowsEffect = _employeeRepository.UpdateById(employee, employeeId);
 
             return rowsEffect;
         }

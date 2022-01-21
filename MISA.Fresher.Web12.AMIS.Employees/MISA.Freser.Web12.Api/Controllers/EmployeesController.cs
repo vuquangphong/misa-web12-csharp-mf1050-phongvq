@@ -12,13 +12,13 @@ namespace MISA.Fresher.Web12.Controllers
     public class EmployeesController : ControllerBase
     {
         // Dependency Injection
-        private readonly IEmployeeRepositories _employeeRepositories;
+        private readonly IEmployeeRepository _employeeRepository;
         private readonly IEmployeeServices _employeeServices;
 
         // Dependency Injection
-        public EmployeesController(IEmployeeRepositories employeeRepositories, IEmployeeServices employeeServices)
+        public EmployeesController(IEmployeeRepository employeeRepository, IEmployeeServices employeeServices)
         {
-            _employeeRepositories = employeeRepositories;
+            _employeeRepository = employeeRepository;
             _employeeServices = employeeServices;
         }
 
@@ -35,7 +35,7 @@ namespace MISA.Fresher.Web12.Controllers
         {
             try
             {
-                var employees = _employeeRepositories.GetAll();
+                var employees = _employeeRepository.GetAll();
 
                 if (employees == null)
                 {
@@ -69,7 +69,7 @@ namespace MISA.Fresher.Web12.Controllers
         {
             try
             {
-                var employee = _employeeRepositories.GetById(employeeId);
+                var employee = _employeeRepository.GetById(employeeId);
 
                 if (employee == null)
                 {
@@ -103,7 +103,7 @@ namespace MISA.Fresher.Web12.Controllers
         {
             try
             {
-                var employees = _employeeRepositories.GetByFilter(employeeFilter);
+                var employees = _employeeRepository.GetByFilter(employeeFilter);
 
                 if (!employees.Any())
                 {
@@ -227,7 +227,7 @@ namespace MISA.Fresher.Web12.Controllers
         {
             try
             {
-                var rowsEffect = _employeeRepositories.DeleteById(employeeId);
+                var rowsEffect = _employeeRepository.DeleteById(employeeId);
 
                 if (rowsEffect > 0)
                 {
