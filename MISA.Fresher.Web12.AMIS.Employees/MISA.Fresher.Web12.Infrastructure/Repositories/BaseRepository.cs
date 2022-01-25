@@ -16,7 +16,7 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
 
         private const string _server = "47.241.69.179";
         private const string _port = "3306";
-        private const string _database = "MISA.CukCuk_Demo_NVMANH_copy";
+        private const string _database = "WEB12.2021.MISA.PHONGVQ";
         private const string _user_id = "dev";
         private const string _password = "manhmisa";
 
@@ -110,7 +110,7 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
                 // Query data in database
                 var sqlQuery = $"SELECT * FROM {_entityName} WHERE " +
                     $"{_entityName}Code LIKE @{_entityName}Filter " +
-                    $"OR FullName LIKE @{_entityName}Filter " +
+                    $"OR {_entityName}Name LIKE @{_entityName}Filter " +
                     $"OR PhoneNumber LIKE @{_entityName}Filter";
                 var entities = SqlConnection.Query<T>(sqlQuery, param: DynamicParams);
 
@@ -154,10 +154,12 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
                 // Query data in database
                 var sqlQuery = "" +
                     "INSERT INTO " +
-                    $"{_entityName}({_entityName}Id, {_entityName}Code, FirstName, LastName, FullName, Gender, " +
-                        "PhoneNumber, Email, Address, DateOfBirth)" +
-                    $"VALUES(@{_entityName}Id, @{_entityName}Code, @FirstName, @LastName, @FullName, @Gender, " +
-                        "@PhoneNumber, @Email, @Address, @DateOfBirth)";
+                    $"{_entityName}({_entityName}Id, {_entityName}Code, FirstName, LastName, {_entityName}Name, Gender, " +
+                        "DateOfBirth, PhoneNumber, Email, Address, IdentityNumber, IdentityDate, IdentityPlace, DepartmentId, " +
+                        "PositionId, TelephoneNumber, BankAccountNumber, BankName, BankBranchName, BankProvinceName, CustomerOrSupplier)" +
+                    $"VALUES(@{_entityName}Id, @{_entityName}Code, @FirstName, @LastName, @{_entityName}Name, @Gender, " +
+                        "@DateOfBirth, @PhoneNumber, @Email, @Address, @IdentityNumber, @IdentityDate, @IdentityPlace, @DepartmentId, " +
+                        "@PositionId, @TelephoneNumber, @BankAccountNumber, @BankName, @BankBranchName, @BankProvinceName, @CustomerOrSupplier)";
 
                 var rowsEffect = SqlConnection.Execute(sqlQuery, param: DynamicParams);
 
@@ -202,10 +204,11 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
                 // Query data in database
                 var sqlQuery = "" +
                     $"UPDATE {_entityName} " +
-                    $"SET {_entityName}Code = @{_entityName}Code, FirstName = @FirstName, LastName = @LastName, " +
-                        "FullName = @FullName, Gender = @Gender, PhoneNumber = @PhoneNumber, " +
-                        "Email = @Email, Address = @Address, DateOfBirth = @DateOfBirth " +
-                    $"WHERE EmployeeId = @EmployeeId";
+                    $"SET {_entityName}Code = @{_entityName}Code, FirstName = @FirstName, LastName = @LastName, {_entityName}Name = @{_entityName}Name, " +
+                    $"DateOfBirth = @DateOfBirth, PhoneNumber = @PhoneNumber, Email = @Email, Address = @Address, IdentityNumber = @IdentityNumber, " +
+                    $"IdentityDate = @IdentityDate, IdentityPlace = @IdentityPlace, DepartmentId = @DepartmentId, PositionId = @PositionId, TelephoneNumber = @TelephoneNumber, " +
+                    $"BankAccountNumber = @BankAccountNumber, BankName = @BankName, BankBranchName = @BankBranchName, BankProvinceName = @BankProvinceName, CustomerOrSupplier = @CustomerOrSupplier " +
+                    $"WHERE {_entityName}Id = @{_entityName}Id";
 
                 var rowsEffect = SqlConnection.Execute(sqlQuery, param: DynamicParams);
 

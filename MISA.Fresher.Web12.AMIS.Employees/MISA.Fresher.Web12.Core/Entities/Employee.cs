@@ -18,7 +18,7 @@ namespace MISA.Fresher.Web12.Core.Entities
         #region Properties
 
         // Primary Key
-        public Guid EmployeeId { get; set; }
+        public Guid? EmployeeId { get; set; }
 
         // Employee Code
         public string? EmployeeCode { get; set; }
@@ -30,7 +30,13 @@ namespace MISA.Fresher.Web12.Core.Entities
         public string? LastName { get; set; }
 
         // Full name of Employee
-        public string? FullName { get; set; }
+        public string? EmployeeName { get; set; }
+
+        // Foreign Key form Department
+        public Guid? DepartmentId { get; set; }
+
+        // Foreign Key form Position
+        public Guid? PositionId { get; set; }
 
         /// <summary>
         /// Gender of Employee
@@ -42,6 +48,9 @@ namespace MISA.Fresher.Web12.Core.Entities
         // Phone number of Employee
         public string? PhoneNumber { get; set; }
 
+        // Landline number of Employee
+        public string? TelephoneNumber { get; set; }
+
         // Email of Employee
         public string? Email { get; set; }
 
@@ -50,6 +59,28 @@ namespace MISA.Fresher.Web12.Core.Entities
 
         // Date of birth of Employee
         public DateTime? DateOfBirth { get; set; }
+
+        public string? IdentityNumber { get; set; }
+
+        public DateTime? IdentityDate { get; set; }
+
+        public string? IdentityPlace { get; set; }
+
+        public string? BankAccountNumber { get; set; }
+
+        public string? BankName { get; set; }
+
+        public string? BankBranchName { get; set; }
+
+        public string? BankProvinceName { get; set; }
+
+        /// <summary>
+        /// 0 --> neither customer or supplier 
+        /// 1 --> customer
+        /// 2 --> supplier
+        /// 3 --> both
+        /// </summary>
+        public int? CustomerOrSupplier { get; set; }
 
         #endregion
 

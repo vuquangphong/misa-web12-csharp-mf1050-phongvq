@@ -31,7 +31,7 @@ namespace MISA.Fresher.Web12.Core.Services
             }
 
             // 2. Handling empty FullName
-            if (string.IsNullOrEmpty(employee.FullName))
+            if (string.IsNullOrEmpty(employee.EmployeeName))
             {
                 throw new MISAValidateException("Tên nhân viên không được phép để trống!");
             }
@@ -60,7 +60,7 @@ namespace MISA.Fresher.Web12.Core.Services
             }
 
             // 2. Handling empty FullName
-            if (string.IsNullOrEmpty(employee.FullName))
+            if (string.IsNullOrEmpty(employee.EmployeeName))
             {
                 throw new MISAValidateException("Tên nhân viên không được phép để trống!");
             }

@@ -112,7 +112,7 @@ namespace MISA.Fresher.Web12.Controllers
 
                 var res = new
                 {
-                    TotalRecord = employees.Count<Employee>(),
+                    TotalRecord = employees.Count(),
                     Data = employees
                 };
                 return Ok(res);
