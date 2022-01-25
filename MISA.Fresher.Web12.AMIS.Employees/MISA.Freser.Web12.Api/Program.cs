@@ -45,7 +45,13 @@ app.UseAuthorization();
 app.MapControllers();
 
 // CORS Lisence
-app.UseCors(options => options.AllowAnyOrigin());
+app.UseCors(builder =>
+{
+    builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
+});
 
 app.Run();
 

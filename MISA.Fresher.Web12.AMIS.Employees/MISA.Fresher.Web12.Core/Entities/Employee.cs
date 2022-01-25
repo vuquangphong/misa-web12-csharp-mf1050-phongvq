@@ -37,7 +37,7 @@ namespace MISA.Fresher.Web12.Core.Entities
         public Guid? DepartmentId { get; set; }
 
         // Foreign Key form Position
-        public Guid? PositionId { get; set; }
+        public Guid? PositionEId { get; set; }
 
         /// <summary>
         /// Gender of Employee

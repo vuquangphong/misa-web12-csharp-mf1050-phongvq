@@ -156,10 +156,10 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
                     "INSERT INTO " +
                     $"{_entityName}({_entityName}Id, {_entityName}Code, FirstName, LastName, {_entityName}Name, Gender, " +
                         "DateOfBirth, PhoneNumber, Email, Address, IdentityNumber, IdentityDate, IdentityPlace, DepartmentId, " +
-                        "PositionId, TelephoneNumber, BankAccountNumber, BankName, BankBranchName, BankProvinceName, CustomerOrSupplier)" +
+                        "PositionEId, TelephoneNumber, BankAccountNumber, BankName, BankBranchName, BankProvinceName, CustomerOrSupplier)" +
                     $"VALUES(@{_entityName}Id, @{_entityName}Code, @FirstName, @LastName, @{_entityName}Name, @Gender, " +
                         "@DateOfBirth, @PhoneNumber, @Email, @Address, @IdentityNumber, @IdentityDate, @IdentityPlace, @DepartmentId, " +
-                        "@PositionId, @TelephoneNumber, @BankAccountNumber, @BankName, @BankBranchName, @BankProvinceName, @CustomerOrSupplier)";
+                        "@PositionEId, @TelephoneNumber, @BankAccountNumber, @BankName, @BankBranchName, @BankProvinceName, @CustomerOrSupplier)";
 
                 var rowsEffect = SqlConnection.Execute(sqlQuery, param: DynamicParams);
 
@@ -206,7 +206,7 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
                     $"UPDATE {_entityName} " +
                     $"SET {_entityName}Code = @{_entityName}Code, FirstName = @FirstName, LastName = @LastName, {_entityName}Name = @{_entityName}Name, " +
                     $"DateOfBirth = @DateOfBirth, PhoneNumber = @PhoneNumber, Email = @Email, Address = @Address, IdentityNumber = @IdentityNumber, " +
-                    $"IdentityDate = @IdentityDate, IdentityPlace = @IdentityPlace, DepartmentId = @DepartmentId, PositionId = @PositionId, TelephoneNumber = @TelephoneNumber, " +
+                    $"IdentityDate = @IdentityDate, IdentityPlace = @IdentityPlace, DepartmentId = @DepartmentId, PositionEId = @PositionEId, TelephoneNumber = @TelephoneNumber, " +
                     $"BankAccountNumber = @BankAccountNumber, BankName = @BankName, BankBranchName = @BankBranchName, BankProvinceName = @BankProvinceName, CustomerOrSupplier = @CustomerOrSupplier " +
                     $"WHERE {_entityName}Id = @{_entityName}Id";
 
