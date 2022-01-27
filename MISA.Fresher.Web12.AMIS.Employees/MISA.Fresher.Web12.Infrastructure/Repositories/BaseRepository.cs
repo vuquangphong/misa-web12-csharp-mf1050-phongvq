@@ -176,18 +176,23 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
         /// <returns>
         /// A number of rows which is affected
         /// </returns>
-        public int UpdateById(T entity, string entityId)
+        public int UpdateById(T entity, Guid entityId)
         {
             using (SqlConnection = ConnectDatabase())
             {
                 // Create dynamic parameters
                 DynamicParams = new DynamicParameters();
+                DynamicParams.Add($"@{_entityName}Id", entityId, DbType.String);
 
                 var properties = entity.GetType().GetProperties();
 
                 foreach (var property in properties)
                 {
                     var propertyName = property.Name;
+                    if (propertyName == $"{_entityName}Id")
+                    {
+                        property.SetValue(entity, entityId);
+                    }
                     var propertyValue = property.GetValue(entity);
                     var propertyType = property.PropertyType;
 
@@ -204,7 +209,7 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
                 // Query data in database
                 var sqlQuery = "" +
                     $"UPDATE {_entityName} " +
-                    $"SET {_entityName}Code = @{_entityName}Code, FirstName = @FirstName, LastName = @LastName, {_entityName}Name = @{_entityName}Name, " +
+                    $"SET {_entityName}Code = @{_entityName}Code, FirstName = @FirstName, LastName = @LastName, {_entityName}Name = @{_entityName}Name, Gender = @Gender, " +
                     $"DateOfBirth = @DateOfBirth, PhoneNumber = @PhoneNumber, Email = @Email, Address = @Address, IdentityNumber = @IdentityNumber, " +
                     $"IdentityDate = @IdentityDate, IdentityPlace = @IdentityPlace, DepartmentId = @DepartmentId, PositionEId = @PositionEId, TelephoneNumber = @TelephoneNumber, " +
                     $"BankAccountNumber = @BankAccountNumber, BankName = @BankName, BankBranchName = @BankBranchName, BankProvinceName = @BankProvinceName, CustomerOrSupplier = @CustomerOrSupplier " +
@@ -243,10 +248,13 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
 
                     foreach (var prop in propsCurEntity)
                     {
-                        var propValue = prop.GetValue(currentEntity).ToString();
-                        if (propValue == entityCode)
+                        if (prop.GetValue(currentEntity) != null)
                         {
-                            return false;
+                            var propValue = prop.GetValue(currentEntity).ToString();
+                            if (propValue == entityCode)
+                            {
+                                return false;
+                            }
                         }
                     }
 

@@ -27,6 +27,6 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Services
         /// <returns>
         /// Number of rows that are affected
         /// </returns>
-        int UpdateService(T entity, string entityId);
+        int UpdateService(T entity, Guid entityId);
     }
 }

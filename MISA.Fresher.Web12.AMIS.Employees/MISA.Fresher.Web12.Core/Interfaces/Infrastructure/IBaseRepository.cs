@@ -56,7 +56,7 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Infrastructure
         /// <returns>
         /// A number of rows which is affected
         /// </returns>
-        public int UpdateById(T entity, string entityId);
+        public int UpdateById(T entity, Guid entityId);
 
         /// <summary>
         /// @author: Vũ Quang Phong (21/01/2022)

@@ -181,7 +181,7 @@ namespace MISA.Fresher.Web12.Controllers
         /// A Message (Success or Fail)
         /// </returns>
         [HttpPut("{employeeId}")]
-        public IActionResult Put(Employee employee ,string employeeId)
+        public IActionResult Put(Employee employee, Guid employeeId)
         {
             try
             {

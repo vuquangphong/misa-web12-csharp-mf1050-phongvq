@@ -34,7 +34,7 @@ namespace MISA.Fresher.Web12.Core.Services
             // Validate data from request
             // 1. General Validations
             BaseServices<T>.IsEmptyValidation(entity);
-            IsDuplicatedValidation(entity, "", false);
+            IsDuplicatedValidation(entity, Guid.NewGuid(), false);
 
             // 2. Distinct Validations 
 
@@ -60,7 +60,7 @@ namespace MISA.Fresher.Web12.Core.Services
         /// <returns>
         /// Number of rows that are affected
         /// </returns>
-        public int UpdateService(T entity, string entityId)
+        public int UpdateService(T entity, Guid entityId)
         {
             // Validate data from request
             // 1. General Validations
@@ -119,7 +119,7 @@ namespace MISA.Fresher.Web12.Core.Services
         /// <param name="entityId"></param>
         /// <param name="isPut"></param>
         /// <exception cref="MISAValidateException"></exception>
-        private void IsDuplicatedValidation(T entity, string entityId, bool isPut)
+        private void IsDuplicatedValidation(T entity, Guid entityId, bool isPut)
         {
             // Getting properties marked not allowed Duplicated
             var notDuplicatedProps = entity.GetType().GetProperties().Where(p => Attribute.IsDefined(p, typeof(NotDuplicated)));
@@ -137,7 +137,7 @@ namespace MISA.Fresher.Web12.Core.Services
                     propsNameDisplay = ((PropsName)propsName[0]).Name;
                 }
 
-                if (_baseRepository.IsDuplicateCode(propValue.ToString(), entityId, isPut))
+                if (_baseRepository.IsDuplicateCode(propValue.ToString(), entityId.ToString(), isPut))
                 {
                     throw new MISAValidateException($"{propsNameDisplay} này đã tồn tại, vui lòng nhập lại!");
                 }
