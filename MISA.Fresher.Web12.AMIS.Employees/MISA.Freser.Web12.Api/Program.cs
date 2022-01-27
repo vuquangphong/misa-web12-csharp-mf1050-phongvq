@@ -21,6 +21,9 @@ builder.Services.AddScoped<IEmployeeServices, EmployeeServices>();
 builder.Services.AddScoped<IDepartmentServices, DepartmentServices>();
 builder.Services.AddScoped<IPositionServices, PositionServices>();
 
+builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+builder.Services.AddScoped(typeof(IBaseServices<>), typeof(BaseServices<>));
+
 // CORS Lisence (24/01/2022)
 builder.Services.AddCors(c =>
 {
@@ -44,7 +47,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// CORS Lisence
+// CORS Policy
 app.UseCors(builder =>
 {
     builder

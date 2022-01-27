@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MISA.Fresher.Web12.Core.MISAAttributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -22,6 +23,9 @@ namespace MISA.Fresher.Web12.Core.Entities
         public Guid? EmployeeId { get; set; }
 
         // Employee Code
+        [NotEmpty]
+        [NotDuplicated]
+        [PropsName("Mã nhân viên")]
         public string? EmployeeCode { get; set; }
 
         // First name of Employee
@@ -31,9 +35,13 @@ namespace MISA.Fresher.Web12.Core.Entities
         public string? LastName { get; set; }
 
         // Full name of Employee
+        [NotEmpty]
+        [PropsName("Tên nhân viên")]
         public string? EmployeeName { get; set; }
 
         // Foreign Key form Department
+        [NotEmpty]
+        [PropsName("Đơn vị")]
         public Guid? DepartmentId { get; set; }
 
         // Foreign Key form Position
@@ -61,18 +69,25 @@ namespace MISA.Fresher.Web12.Core.Entities
         // Date of birth of Employee
         public DateTime? DateOfBirth { get; set; }
 
+        // Identity Number of Employee
         public string? IdentityNumber { get; set; }
 
+        // Identity Date of Employee
         public DateTime? IdentityDate { get; set; }
 
+        // Identity Place of Employee
         public string? IdentityPlace { get; set; }
 
+        // Bank Account Number of Employee
         public string? BankAccountNumber { get; set; }
 
+        // Bank Name of Employee
         public string? BankName { get; set; }
 
+        // Bank Branch Name of Employee
         public string? BankBranchName { get; set; }
 
+        // Bank Province Name of Employee
         public string? BankProvinceName { get; set; }
 
         /// <summary>

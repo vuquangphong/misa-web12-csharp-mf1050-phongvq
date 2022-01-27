@@ -218,6 +218,7 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
 
         /// <summary>
         /// @author: Vũ Quang Phong (21/01/2022)
+        /// @edited: Vũ Quang Phong (26/01/2022)
         /// @desc: Check if the current EntityCode is duplicate
         /// </summary>
         /// <param name="entityCode"></param>
@@ -225,15 +226,32 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
         /// True <--> EntityCode Coincidence
         /// False <--> No EentityCode Coincidence
         /// </returns>
-        public bool IsDuplicateCode(string entityCode)
+        public bool IsDuplicateCode(string entityCode, string entityId, bool isPut)
         {
             using (SqlConnection = ConnectDatabase())
             {
-                // Create dynamic parameters
                 DynamicParams = new DynamicParameters();
                 DynamicParams.Add($"@{_entityName}Code", entityCode);
 
-                // Query data in database
+                if (isPut)
+                {
+                    DynamicParams.Add($"@{_entityName}Id", entityId);
+
+                    var sqlQuery = $"SELECT * FROM {_entityName} WHERE {_entityName}Id = @{_entityName}Id";
+                    var currentEntity = SqlConnection.QueryFirstOrDefault<T>(sqlQuery, param: DynamicParams);
+                    var propsCurEntity = currentEntity.GetType().GetProperties();
+
+                    foreach (var prop in propsCurEntity)
+                    {
+                        var propValue = prop.GetValue(currentEntity).ToString();
+                        if (propValue == entityCode)
+                        {
+                            return false;
+                        }
+                    }
+
+                }
+                
                 var sqlCheck = $"SELECT {_entityName}Code FROM {_entityName} WHERE {_entityName}Code = @{_entityName}Code";
                 var isExist = SqlConnection.QueryFirstOrDefault(sqlCheck, param: DynamicParams);
 
@@ -241,7 +259,8 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
                 {
                     return false;
                 }
-                return true;
+                return true;         
+               
             }
         }
 

@@ -8,7 +8,6 @@ using MISA.Fresher.Web12.Core.Entities;
 namespace MISA.Fresher.Web12.Core.Interfaces.Services
 {
     public interface IEmployeeServices : IBaseServices<Employee>
-    {
-        
+    {  
     }
 }

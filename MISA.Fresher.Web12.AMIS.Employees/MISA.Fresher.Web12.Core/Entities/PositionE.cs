@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MISA.Fresher.Web12.Core.MISAAttributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,15 @@ namespace MISA.Fresher.Web12.Core.Entities
         public Guid? PositionEId { get; set; }
 
         // Position Code
+        [NotEmpty]
+        [NotDuplicated]
+        [PropsName("Mã chức vụ")]
         public string? PositionECode { get; set; }
 
         // Position Name
+        [NotEmpty]
+        [NotDuplicated]
+        [PropsName("Tên chức vụ")]
         public string? PositionEName { get; set; }
 
         // Description of the Position

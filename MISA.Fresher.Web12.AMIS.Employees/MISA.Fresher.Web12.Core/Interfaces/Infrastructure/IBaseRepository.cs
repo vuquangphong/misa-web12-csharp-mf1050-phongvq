@@ -60,6 +60,7 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Infrastructure
 
         /// <summary>
         /// @author: Vũ Quang Phong (21/01/2022)
+        /// @edited: Vũ Quang Phong (26/01/2022)
         /// @desc: Check if the current EntityCode is duplicate
         /// </summary>
         /// <param name="entityCode"></param>
@@ -67,7 +68,7 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Infrastructure
         /// True <--> EntityCode Coincidence
         /// False <--> No EentityCode Coincidence
         /// </returns>
-        public bool IsDuplicateCode(string entityCode);
+        public bool IsDuplicateCode(string entityCode, string entityId, bool isPut);
 
         /// <summary>
         /// @author: Vũ Quang Phong (21/01/2022)

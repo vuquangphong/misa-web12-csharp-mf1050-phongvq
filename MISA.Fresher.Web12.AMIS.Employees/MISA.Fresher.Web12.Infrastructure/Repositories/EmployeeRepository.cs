@@ -12,7 +12,6 @@ using System.Data;
 namespace MISA.Fresher.Web12.Infrastructure.Repositories
 {
     public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
-    {
-        
+    {   
     }
 }
