@@ -11,6 +11,7 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Services
         /// <summary>
         /// @author: Vũ Quang Phong (24/01/2022)
         /// @desc: The Service for Adding a new Entity
+        /// @edited: Vũ Quang Phong (26/01/2022)
         /// </summary>
         /// <param name="entity"></param>
         /// <returns>
@@ -21,6 +22,7 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Services
         /// <summary>
         /// @author: Vũ Quang Phong (24/01/2022)
         /// @desc: The Service for Updating an Entity
+        /// @edited: Vũ Quang Phong (26/01/2022)
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="entityId"></param>

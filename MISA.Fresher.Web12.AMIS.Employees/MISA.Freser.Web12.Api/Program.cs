@@ -24,7 +24,7 @@ builder.Services.AddScoped<IPositionServices, PositionServices>();
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddScoped(typeof(IBaseServices<>), typeof(BaseServices<>));
 
-// CORS Lisence (24/01/2022)
+// CORS Policy (24/01/2022)
 builder.Services.AddCors(c =>
 {
     c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
@@ -47,7 +47,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// CORS Policy
+// CORS Policy (25/01/2022)
 app.UseCors(builder =>
 {
     builder

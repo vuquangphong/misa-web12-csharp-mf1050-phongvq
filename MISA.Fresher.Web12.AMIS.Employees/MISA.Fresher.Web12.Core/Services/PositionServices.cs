@@ -12,13 +12,15 @@ namespace MISA.Fresher.Web12.Core.Services
 {
     public class PositionServices : BaseServices<PositionE>, IPositionServices
     {
-        // Dependency Injection
+        #region Dependency Injection
+
         private readonly IPositionRepository _positionRepository;
 
-        // Dependency Injection
         public PositionServices(IPositionRepository positionRepository) : base(positionRepository)
         {
             _positionRepository = positionRepository;
         }
+
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using MISA.Fresher.Web12.Core.MISAAttributes;
+﻿using MISA.Fresher.Web12.Core.Enum;
+using MISA.Fresher.Web12.Core.MISAAttributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -52,7 +53,7 @@ namespace MISA.Fresher.Web12.Core.Entities
         /// Gender = 0 --> Female
         /// Gender = 1 --> Male
         /// </summary>
-        public int? Gender { get; set; }
+        public Gender? Gender { get; set; }
 
         // Phone number of Employee
         public string? PhoneNumber { get; set; }
@@ -96,7 +97,7 @@ namespace MISA.Fresher.Web12.Core.Entities
         /// 2 --> supplier
         /// 3 --> both
         /// </summary>
-        public int? CustomerOrSupplier { get; set; }
+        public CustomerOrSupplier? CustomerOrSupplier { get; set; }
 
         #endregion
 

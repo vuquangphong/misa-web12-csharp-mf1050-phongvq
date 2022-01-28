@@ -12,23 +12,19 @@ namespace MISA.Fresher.Web12.Core.Services
 {
     public class BaseServices<T> : IBaseServices<T>
     {
-        // Dependency Injection
+        #region Dependency Injection
+
         private readonly IBaseRepository<T> _baseRepository;
 
-        // Dependency Injection
         public BaseServices(IBaseRepository<T> baseRepository)
         {
             _baseRepository = baseRepository;
         }
 
-        /// <summary>
-        /// @author: Vũ Quang Phong (26/01/2022)
-        /// @desc: The Service for Adding a new Entity
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns>
-        /// Number of rows that are affected
-        /// </returns>
+        #endregion
+
+        #region Main Functions
+
         public int InsertService(T entity)
         {
             // Validate data from request
@@ -51,15 +47,6 @@ namespace MISA.Fresher.Web12.Core.Services
             return rowsEffect;
         }
 
-        /// <summary>
-        /// @author: Vũ Quang Phong (26/01/2022)
-        /// @desc: The Service for Updating an Entity
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <param name="entityId"></param>
-        /// <returns>
-        /// Number of rows that are affected
-        /// </returns>
         public int UpdateService(T entity, Guid entityId)
         {
             // Validate data from request
@@ -75,6 +62,8 @@ namespace MISA.Fresher.Web12.Core.Services
             return rowsEffect;
         }
 
+        #endregion
+
         #region Support Methods
 
         // General Validation
@@ -82,6 +71,7 @@ namespace MISA.Fresher.Web12.Core.Services
         /// <summary>
         /// @author: Vũ Quang Phong (26/01/2022)
         /// @desc: Check if NotEmpty Props
+        /// @edited: Vũ Quang Phong (28/01/2022)
         /// </summary>
         /// <param name="entity"></param>
         /// <exception cref="MISAValidateException"></exception>
@@ -105,7 +95,7 @@ namespace MISA.Fresher.Web12.Core.Services
 
                 if (propValue == null || string.IsNullOrEmpty(propValue.ToString()))
                 {
-                    throw new MISAValidateException($"{propsNameDisplay} không được phép để trống!");
+                    throw new MISAValidateException(String.Format(Core.Resources.ResourceVietnam.PropNotEmpty, propsNameDisplay));
                 }
             }
         }
@@ -114,6 +104,7 @@ namespace MISA.Fresher.Web12.Core.Services
         /// <summary>
         /// @author: Vũ Quang Phong (26/01/2022)
         /// @desc: Check if NotDuplicated Props
+        /// @edited: Vũ Quang Phong (28/01/2022)
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="entityId"></param>
@@ -139,7 +130,7 @@ namespace MISA.Fresher.Web12.Core.Services
 
                 if (_baseRepository.IsDuplicateCode(propValue.ToString(), entityId.ToString(), isPut))
                 {
-                    throw new MISAValidateException($"{propsNameDisplay} này đã tồn tại, vui lòng nhập lại!");
+                    throw new MISAValidateException(String.Format(Core.Resources.ResourceVietnam.PropNotDuplicated, propsNameDisplay));
                 }
             }
         }

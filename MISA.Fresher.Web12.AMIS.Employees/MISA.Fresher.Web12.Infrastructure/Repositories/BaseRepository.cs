@@ -14,6 +14,7 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
     {
         #region Some properties
 
+        // Information of  Database
         private const string _server = "47.241.69.179";
         private const string _port = "3306";
         private const string _database = "WEB12.2021.MISA.PHONGVQ";
@@ -28,6 +29,14 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
         #endregion
 
         #region Support Methods
+
+        /// <summary>
+        /// @desc: Create the connection string from Database Info
+        /// @author: Vũ Quang Phong (21/01/2022)
+        /// </summary>
+        /// <returns>
+        /// The connection string
+        /// </returns>
         private static string GetConnectionString()
         {
             return "" +
@@ -38,6 +47,13 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
                 $"Password = '{_password}'";
         }
 
+        /// <summary>
+        /// @desc: Create MySQL Connection from Connection string
+        /// @author: Vũ Quang Phong (21/01/2022)
+        /// </summary>
+        /// <returns>
+        /// The MySqlConnection
+        /// </returns>
         protected static MySqlConnection ConnectDatabase()
         {
             // Declare the info of Database
@@ -51,13 +67,8 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
 
         #endregion
 
-        /// <summary>
-        /// @author: Vũ Quang Phong (21/01/2022)
-        /// @desc: Getting all the Entities <T> from Database
-        /// </summary>
-        /// <returns>
-        /// An array of Entities <T>
-        /// </returns>
+        #region Main Methods
+
         public IEnumerable<T> GetAll()
         {
             using (SqlConnection = ConnectDatabase())
@@ -67,14 +78,6 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
             }
         }
 
-        /// <summary>
-        /// @author:Vũ Quang Phong (21/01/2022)
-        /// @desc: Getting an Entity <T> from Database by Id
-        /// </summary>
-        /// <param name="entityId"></param>
-        /// <returns>
-        /// An Entity
-        /// </returns>
         public T GetById(string entityId)
         {
             using (SqlConnection = ConnectDatabase())
@@ -91,14 +94,6 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
             }
         }
 
-        /// <summary>
-        /// @author: Vũ Quang Phong (21/01/2022)
-        /// @desc: Search for Entities by Filter (code, name, phonenumber)
-        /// </summary>
-        /// <param name="entitiesFilter"></param>
-        /// <returns>
-        /// An array of Entities
-        /// </returns>
         public IEnumerable<T> GetByFilter(string entitiesFilter)
         {
             using (SqlConnection = ConnectDatabase())
@@ -118,119 +113,94 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
             }
         }
 
-        /// <summary>
-        /// @author: Vũ Quang Phong (21/01/2022)
-        /// @desc: Inserting a new record into Entity Database
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns>
-        /// A number of rows which is affected
-        /// </returns>
         public int Insert(T entity)
         {
-            using (SqlConnection = ConnectDatabase())
+            // Sql string query
+            var sqlColumnsName = new StringBuilder();
+            var sqlColumnsValue = new StringBuilder();
+            string delimiter = "";
+
+            // Create dynamic parameters
+            DynamicParams = new DynamicParameters();
+
+            var properties = entity.GetType().GetProperties();
+
+            foreach (var property in properties)
             {
-                // Create dynamic parameters
-                DynamicParams = new DynamicParameters();
+                var propertyName = property.Name;
+                var propertyValue = property.GetValue(entity);
+                var propertyType = property.PropertyType;
 
-                var properties = entity.GetType().GetProperties();
-
-                foreach (var property in properties)
+                if (propertyType == typeof(Guid) || propertyType == typeof(Guid?))
                 {
-                    var propertyName = property.Name;
-                    var propertyValue = property.GetValue(entity);
-                    var propertyType = property.PropertyType;
-
-                    if (propertyType == typeof(Guid) || propertyType == typeof(Guid?))
-                    {
-                        DynamicParams.Add($"@{propertyName}", propertyValue, DbType.String);
-                    }
-                    else
-                    {
-                        DynamicParams.Add($"@{propertyName}", propertyValue);
-                    }
+                    DynamicParams.Add($"@{propertyName}", propertyValue, DbType.String);
+                }
+                else
+                {
+                    DynamicParams.Add($"@{propertyName}", propertyValue);
                 }
 
-                // Query data in database
-                var sqlQuery = "" +
-                    "INSERT INTO " +
-                    $"{_entityName}({_entityName}Id, {_entityName}Code, FirstName, LastName, {_entityName}Name, Gender, " +
-                        "DateOfBirth, PhoneNumber, Email, Address, IdentityNumber, IdentityDate, IdentityPlace, DepartmentId, " +
-                        "PositionEId, TelephoneNumber, BankAccountNumber, BankName, BankBranchName, BankProvinceName, CustomerOrSupplier)" +
-                    $"VALUES(@{_entityName}Id, @{_entityName}Code, @FirstName, @LastName, @{_entityName}Name, @Gender, " +
-                        "@DateOfBirth, @PhoneNumber, @Email, @Address, @IdentityNumber, @IdentityDate, @IdentityPlace, @DepartmentId, " +
-                        "@PositionEId, @TelephoneNumber, @BankAccountNumber, @BankName, @BankBranchName, @BankProvinceName, @CustomerOrSupplier)";
+                sqlColumnsName.Append($"{delimiter}{propertyName}");
+                sqlColumnsValue.Append($"{delimiter}@{propertyName}");
+                delimiter = ", ";
+            }
 
+            var sqlQuery = $"INSERT INTO {_entityName}({sqlColumnsName}) VALUES ({sqlColumnsValue})";
+
+            using (SqlConnection = ConnectDatabase())
+            {
                 var rowsEffect = SqlConnection.Execute(sqlQuery, param: DynamicParams);
 
                 return rowsEffect;
             }
         }
 
-        /// <summary>
-        /// @author: Vũ Quang Phong (21/01/2022)
-        /// @desc: Updating an Entity by Id
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <param name="entityId"></param>
-        /// <returns>
-        /// A number of rows which is affected
-        /// </returns>
         public int UpdateById(T entity, Guid entityId)
         {
-            using (SqlConnection = ConnectDatabase())
+            // Sql string query
+            var sqlSetColumns = new StringBuilder();
+            string delimiter = "";
+
+            // Create dynamic parameters
+            DynamicParams = new DynamicParameters();
+            DynamicParams.Add($"@{_entityName}Id", entityId, DbType.String);
+
+            var properties = entity.GetType().GetProperties();
+
+            foreach (var property in properties)
             {
-                // Create dynamic parameters
-                DynamicParams = new DynamicParameters();
-                DynamicParams.Add($"@{_entityName}Id", entityId, DbType.String);
-
-                var properties = entity.GetType().GetProperties();
-
-                foreach (var property in properties)
+                var propertyName = property.Name;
+                if (propertyName == $"{_entityName}Id")
                 {
-                    var propertyName = property.Name;
-                    if (propertyName == $"{_entityName}Id")
-                    {
-                        property.SetValue(entity, entityId);
-                    }
-                    var propertyValue = property.GetValue(entity);
-                    var propertyType = property.PropertyType;
+                    property.SetValue(entity, entityId);
+                }
+                var propertyValue = property.GetValue(entity);
+                var propertyType = property.PropertyType;
 
-                    if (propertyType == typeof(Guid) || propertyType == typeof(Guid?))
-                    {
-                        DynamicParams.Add($"@{propertyName}", propertyValue, DbType.String);
-                    }
-                    else
-                    {
-                        DynamicParams.Add($"@{propertyName}", propertyValue);
-                    }
+                if (propertyType == typeof(Guid) || propertyType == typeof(Guid?))
+                {
+                    DynamicParams.Add($"@{propertyName}", propertyValue, DbType.String);
+                }
+                else
+                {
+                    DynamicParams.Add($"@{propertyName}", propertyValue);
                 }
 
-                // Query data in database
-                var sqlQuery = "" +
-                    $"UPDATE {_entityName} " +
-                    $"SET {_entityName}Code = @{_entityName}Code, FirstName = @FirstName, LastName = @LastName, {_entityName}Name = @{_entityName}Name, Gender = @Gender, " +
-                    $"DateOfBirth = @DateOfBirth, PhoneNumber = @PhoneNumber, Email = @Email, Address = @Address, IdentityNumber = @IdentityNumber, " +
-                    $"IdentityDate = @IdentityDate, IdentityPlace = @IdentityPlace, DepartmentId = @DepartmentId, PositionEId = @PositionEId, TelephoneNumber = @TelephoneNumber, " +
-                    $"BankAccountNumber = @BankAccountNumber, BankName = @BankName, BankBranchName = @BankBranchName, BankProvinceName = @BankProvinceName, CustomerOrSupplier = @CustomerOrSupplier " +
-                    $"WHERE {_entityName}Id = @{_entityName}Id";
+                sqlSetColumns.Append($"{delimiter}{propertyName} = @{propertyName}");
+                delimiter = ", ";
+            }
 
+            // Query data in database
+            var sqlQuery = $"UPDATE {_entityName} SET {sqlSetColumns} WHERE {_entityName}Id = @{_entityName}Id";
+
+            using (SqlConnection = ConnectDatabase())
+            {
                 var rowsEffect = SqlConnection.Execute(sqlQuery, param: DynamicParams);
 
                 return rowsEffect;
             }
         }
 
-        /// <summary>
-        /// @author: Vũ Quang Phong (21/01/2022)
-        /// @edited: Vũ Quang Phong (26/01/2022)
-        /// @desc: Check if the current EntityCode is duplicate
-        /// </summary>
-        /// <param name="entityCode"></param>
-        /// <returns>
-        /// True <--> EntityCode Coincidence
-        /// False <--> No EentityCode Coincidence
-        /// </returns>
         public bool IsDuplicateCode(string entityCode, string entityId, bool isPut)
         {
             using (SqlConnection = ConnectDatabase())
@@ -272,14 +242,6 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
             }
         }
 
-        /// <summary>
-        /// @author: Vũ Quang Phong (21/01/2022)
-        /// @desc: Removing an Entity from Database
-        /// </summary>
-        /// <param name="entityId"></param>
-        /// <returns>
-        /// A number of rows which is affected
-        /// </returns>
         public int DeleteById(string entityId)
         {
             using (SqlConnection = ConnectDatabase())
@@ -295,5 +257,7 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
                 return rowEffects;
             }
         }
+
+        #endregion
     }
 }

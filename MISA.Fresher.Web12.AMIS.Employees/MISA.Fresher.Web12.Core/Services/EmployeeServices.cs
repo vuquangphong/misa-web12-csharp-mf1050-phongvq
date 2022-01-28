@@ -12,13 +12,15 @@ namespace MISA.Fresher.Web12.Core.Services
 {
     public class EmployeeServices : BaseServices<Employee>, IEmployeeServices
     {
-        // Dependency Injection
+        #region Dependency Injection
+
         private readonly IEmployeeRepository _employeeRepository;
 
-        // Dependency Injection
         public EmployeeServices(IEmployeeRepository employeeRepository) : base(employeeRepository)
         {
             _employeeRepository = employeeRepository;
         }
+
+        #endregion
     }
 }
