@@ -13,6 +13,15 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Infrastructure
     /// </summary>
     public interface IEmployeeRepository : IBaseRepository<Employee>
     {
-        
+        /// <summary>
+        /// @author: Vũ Quang Phong (04/02/2022)
+        /// @desc: Get a list of Employees by PageIndex and PageSize
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns>
+        /// A list of Employees
+        /// </returns>
+        public object GetEmployeesPaging(int pageIndex, int pageSize);
     }
 }

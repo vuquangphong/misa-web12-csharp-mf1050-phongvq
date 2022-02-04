@@ -76,7 +76,9 @@ namespace MISA.Fresher.Web12.Controllers
         {
             try
             {
-                return Ok();
+                var employeesPaging = _employeeRepository.GetEmployeesPaging(pageIndex, pageSize);
+
+                return Ok(employeesPaging);
             }
             catch (Exception ex)
             {
