@@ -15,11 +15,11 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
         #region Some properties
 
         // Information of  Database
-        private const string _server = "47.241.69.179";
+        private const string _server = "13.229.200.157";
         private const string _port = "3306";
         private const string _database = "WEB12.2021.MISA.PHONGVQ";
         private const string _user_id = "dev";
-        private const string _password = "manhmisa";
+        private const string _password = "12345678";
 
         private readonly string _entityName = typeof(T).Name;
 

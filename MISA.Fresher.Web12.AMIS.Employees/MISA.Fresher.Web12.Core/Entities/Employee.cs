@@ -99,6 +99,12 @@ namespace MISA.Fresher.Web12.Core.Entities
         /// </summary>
         public CustomerOrSupplier? CustomerOrSupplier { get; set; }
 
+        // The point of time that Employee is created
+        public DateTime? CreatedDate { get; set; }
+
+        // The point of time that Employee is modified
+        public DateTime? ModifiedDate { get; set; }
+
         #endregion
 
         #region Method
