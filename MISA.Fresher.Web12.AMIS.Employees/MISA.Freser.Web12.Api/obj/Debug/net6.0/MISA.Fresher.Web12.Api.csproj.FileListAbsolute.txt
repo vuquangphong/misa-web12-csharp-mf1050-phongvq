@@ -35,3 +35,12 @@ C:\Users\thapq\MISA-TRAINING\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fres
 C:\Users\thapq\MISA-TRAINING\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Freser.Web12.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\thapq\MISA-TRAINING\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Freser.Web12.Api\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\thapq\MISA-TRAINING\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Freser.Web12.Api\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\thapq\MISA-TRAINING\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Freser.Web12.Api\bin\Debug\net6.0\ClosedXML.dll
+C:\Users\thapq\MISA-TRAINING\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Freser.Web12.Api\bin\Debug\net6.0\DocumentFormat.OpenXml.dll
+C:\Users\thapq\MISA-TRAINING\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Freser.Web12.Api\bin\Debug\net6.0\ExcelNumberFormat.dll
+C:\Users\thapq\MISA-TRAINING\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Freser.Web12.Api\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\thapq\MISA-TRAINING\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Freser.Web12.Api\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\Users\thapq\MISA-TRAINING\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Freser.Web12.Api\bin\Debug\net6.0\System.IO.Packaging.dll
+C:\Users\thapq\MISA-TRAINING\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Freser.Web12.Api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\thapq\MISA-TRAINING\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Freser.Web12.Api\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.0\System.Drawing.Common.dll
+C:\Users\thapq\MISA-TRAINING\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Freser.Web12.Api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.0\System.Drawing.Common.dll

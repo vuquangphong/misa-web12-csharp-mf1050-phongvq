@@ -73,7 +73,7 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
         {
             using (SqlConnection = ConnectDatabase())
             {
-                var entities = SqlConnection.Query<T>($"SELECT * FROM {_entityName}");
+                var entities = SqlConnection.Query<T>($"SELECT * FROM {_entityName} ORDER BY CreatedDate DESC");
                 return entities;
             }
         }

@@ -45,8 +45,14 @@ namespace MISA.Fresher.Web12.Core.Entities
         [PropsName("Đơn vị")]
         public Guid? DepartmentId { get; set; }
 
+        // Name of the Department
+        public string? DepartmentName { get; set; }
+
         // Foreign Key form Position
         public Guid? PositionEId { get; set; }
+
+        // Name of the Position
+        public string? PositionEName { get; set; }
 
         /// <summary>
         /// Gender of Employee
