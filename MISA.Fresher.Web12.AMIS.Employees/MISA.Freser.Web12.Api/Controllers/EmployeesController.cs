@@ -199,30 +199,22 @@ namespace MISA.Fresher.Web12.Controllers
         /// <summary>
         /// @method: GET /Employees/filter?employeeFilter=...
         /// @desc: Search for Employees by employeeFilter (code, name, phonenumber)
+        /// Get Paging
         /// @author: Vũ Quang Phong (20/01/2022)
+        /// @edited_by: Vũ Quang Phong (13/02/2022)
         /// </summary>
         /// <param name="employeeFilter"></param>
         /// <returns>
         /// An object contains the Number of Records & the Array of Employees
         /// </returns>
         [HttpGet("filter")]
-        public IActionResult GetByFilter(string? employeeFilter)
+        public IActionResult GetPaging(int? pageIndex, int? pageSize, string? employeeFilter)
         {
             try
             {
-                var employees = _employeeRepository.GetByFilter(employeeFilter);
+                var dataEmployees = _employeeServices.GetEmployeesPaging(pageIndex, pageSize, employeeFilter);
 
-                if (!employees.Any())
-                {
-                    return NoContent();
-                }
-
-                var res = new
-                {
-                    TotalRecord = employees.Count(),
-                    Data = employees
-                };
-                return Ok(res);
+                return Ok(dataEmployees);
             }
             catch (Exception ex)
             {

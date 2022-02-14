@@ -24,13 +24,14 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Infrastructure
 
         /// <summary>
         /// @author: Vũ Quang Phong (04/02/2022)
-        /// @desc: Get a list of Employees by PageIndex and PageSize
+        /// @desc: Get a list of Employees by PageIndex and PageSize, and/or searchText
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
+        /// <param name="searchText"></param>
         /// <returns>
         /// A list of Employees
         /// </returns>
-        public object GetEmployeesPaging(int pageIndex, int pageSize);
+        public object GetEmployeesPaging(int? pageIndex, int? pageSize, string? employeeFilter);
     }
 }

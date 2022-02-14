@@ -22,5 +22,14 @@ namespace MISA.Fresher.Web12.Core.Services
         }
 
         #endregion
+
+        #region Main Method
+
+        public object GetEmployeesPaging(int? pageIndex, int? pageSize, string? employeeFilter)
+        {
+            return _employeeRepository.GetEmployeesPaging(pageIndex, pageSize, employeeFilter);
+        }
+
+        #endregion
     }
 }
