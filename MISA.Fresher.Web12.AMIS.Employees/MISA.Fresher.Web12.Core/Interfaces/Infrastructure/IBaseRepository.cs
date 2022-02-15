@@ -29,16 +29,6 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Infrastructure
 
         /// <summary>
         /// @author: Vũ Quang Phong (21/01/2022)
-        /// @desc: Search for Entities by Filter (code, name, phonenumber)
-        /// </summary>
-        /// <param name="entitiesFilter"></param>
-        /// <returns>
-        /// An array of Entities
-        /// </returns>
-        public IEnumerable<T> GetByFilter(string entitiesFilter);
-
-        /// <summary>
-        /// @author: Vũ Quang Phong (21/01/2022)
         /// @desc: Inserting a new record into Entity Database
         /// </summary>
         /// <param name="entity"></param>

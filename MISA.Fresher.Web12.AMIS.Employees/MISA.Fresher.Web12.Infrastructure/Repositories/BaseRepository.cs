@@ -94,25 +94,6 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
             }
         }
 
-        public IEnumerable<T> GetByFilter(string entitiesFilter)
-        {
-            using (SqlConnection = ConnectDatabase())
-            {
-                // Create dynamic parameters
-                DynamicParams = new DynamicParameters();
-                DynamicParams.Add($"@{_entityName}Filter", $"%{entitiesFilter}%");
-
-                // Query data in database
-                var sqlQuery = $"SELECT * FROM {_entityName} WHERE " +
-                    $"{_entityName}Code LIKE @{_entityName}Filter " +
-                    $"OR {_entityName}Name LIKE @{_entityName}Filter " +
-                    $"OR PhoneNumber LIKE @{_entityName}Filter";
-                var entities = SqlConnection.Query<T>(sqlQuery, param: DynamicParams);
-
-                return entities;
-            }
-        }
-
         public int Insert(T entity)
         {
             // Sql string query

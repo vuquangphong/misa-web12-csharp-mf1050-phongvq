@@ -60,7 +60,7 @@ namespace MISA.Fresher.Web12.Api.Controllers
         {
             try
             {
-                var entities = _baseRepository.GetAll();
+                var entities = _baseServices.GetAllService();
 
                 if (entities == null)
                 {
@@ -89,7 +89,7 @@ namespace MISA.Fresher.Web12.Api.Controllers
         {
             try
             {
-                var entity = _baseRepository.GetById(entityId);
+                var entity = _baseServices.GetByIdService(entityId);
 
                 if (entity == null)
                 {
@@ -193,7 +193,7 @@ namespace MISA.Fresher.Web12.Api.Controllers
         {
             try
             {
-                var rowsEffect = _baseRepository.DeleteById(entityId);
+                var rowsEffect = _baseServices.DeleteService(entityId);
 
                 if (rowsEffect > 0)
                 {

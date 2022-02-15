@@ -25,6 +25,16 @@ namespace MISA.Fresher.Web12.Core.Services
 
         #region Main Functions
 
+        public IEnumerable<T> GetAllService()
+        {
+            return _baseRepository.GetAll();
+        }
+
+        public T GetByIdService(string entityId)
+        {
+            return _baseRepository.GetById(entityId);
+        }
+
         public int InsertService(T entity)
         {
             // Validate data from request
@@ -60,6 +70,11 @@ namespace MISA.Fresher.Web12.Core.Services
             int rowsEffect = _baseRepository.UpdateById(entity, entityId);
 
             return rowsEffect;
+        }
+
+        public int DeleteService(string entityId)
+        {
+            return _baseRepository.DeleteById(entityId);
         }
 
         public int DeleteMultiService(string[] entityIds)

@@ -9,6 +9,25 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Services
     public interface IBaseServices<T>
     {
         /// <summary>
+        /// @author: Vũ Quang Phong (14/02/2022)
+        /// @desc: The Service of GetAll
+        /// </summary>
+        /// <returns>
+        /// A list of Entities
+        /// </returns>
+        public IEnumerable<T> GetAllService();
+
+        /// <summary>
+        /// @author: Vũ Quang Phong (14/02/2022)
+        /// @desc: The service of Get by Id
+        /// </summary>
+        /// <param name="entityId"></param>
+        /// <returns>
+        /// An Entity
+        /// </returns>
+        public T GetByIdService(string entityId);
+
+        /// <summary>
         /// @author: Vũ Quang Phong (24/01/2022)
         /// @desc: The Service for Adding a new Entity
         /// @edited: Vũ Quang Phong (26/01/2022)
@@ -30,6 +49,16 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Services
         /// Number of rows that are affected
         /// </returns>
         public int UpdateService(T entity, Guid entityId);
+
+        /// <summary>
+        /// @author: Vũ Quang Phong (14/02/2022)
+        /// @desc: The Service of Removing an Entity by Id
+        /// </summary>
+        /// <param name="entityId"></param>
+        /// <returns>
+        /// Number of rows affected
+        /// </returns>
+        public int DeleteService(string entityId);
 
         /// <summary>
         /// @author: Vũ Quang Phong (14/02/2022)
