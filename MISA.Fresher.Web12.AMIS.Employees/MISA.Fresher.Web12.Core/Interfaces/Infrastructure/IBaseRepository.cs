@@ -80,5 +80,15 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Infrastructure
         /// A number of rows which is affected
         /// </returns>
         public int DeleteById(string entityId);
+
+        /// <summary>
+        /// @author: Vũ Quang Phong (14/02/2022)
+        /// @desc: Removing Multiple Entities by an array of Ids
+        /// </summary>
+        /// <param name="entityIds"></param>
+        /// <returns>
+        /// The number of rows affected
+        /// </returns>
+        public int DeleteMultiById(string[] entityIds);
     }
 }

@@ -62,6 +62,11 @@ namespace MISA.Fresher.Web12.Core.Services
             return rowsEffect;
         }
 
+        public int DeleteMultiService(string[] entityIds)
+        {
+            return _baseRepository.DeleteMultiById(entityIds);
+        }
+
         #endregion
 
         #region Support Methods

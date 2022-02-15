@@ -17,7 +17,7 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Services
         /// <returns>
         /// Number of rows that are affected
         /// </returns>
-        int InsertService(T entity);
+        public int InsertService(T entity);
 
         /// <summary>
         /// @author: Vũ Quang Phong (24/01/2022)
@@ -29,6 +29,16 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Services
         /// <returns>
         /// Number of rows that are affected
         /// </returns>
-        int UpdateService(T entity, Guid entityId);
+        public int UpdateService(T entity, Guid entityId);
+
+        /// <summary>
+        /// @author: Vũ Quang Phong (14/02/2022)
+        /// @desc: The Service of Removing multiple Entities by an array Ids
+        /// </summary>
+        /// <param name="entityIds"></param>
+        /// <returns>
+        /// Number of Rows affected
+        /// </returns>
+        public int DeleteMultiService(string[] entityIds);
     }
 }

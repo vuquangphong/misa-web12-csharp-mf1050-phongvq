@@ -252,9 +252,34 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
 
                 // Query data in Database
                 var sqlQuery = $"DELETE FROM {_entityName} WHERE {_entityName}Id = @{_entityName}Id";
-                var rowEffects = SqlConnection.Execute(sqlQuery, param: DynamicParams);
+                var rowsEffect = SqlConnection.Execute(sqlQuery, param: DynamicParams);
 
-                return rowEffects;
+                return rowsEffect;
+            }
+        }
+
+        public int DeleteMultiById(string[] entityIds)
+        {
+            // Init query string
+            StringBuilder idCompare = new StringBuilder();
+            string delimeter = "";
+
+            DynamicParams = new DynamicParameters();
+
+            foreach (var (id, index) in entityIds.Select((id, index) => (id, index)))
+            {
+                DynamicParams.Add($"@{_entityName}Id{index}", id, DbType.String);
+
+                idCompare.Append($"{delimeter}{_entityName}Id = @{_entityName}Id{index}");
+                delimeter = " OR ";
+            }
+
+            // Query and Return
+            var sqlQuery = $"DELETE FROM {_entityName} WHERE {idCompare}";
+            using (SqlConnection = ConnectDatabase())
+            {
+                var rowsEffect = SqlConnection.Execute(sqlQuery, param: DynamicParams);
+                return rowsEffect;
             }
         }
 

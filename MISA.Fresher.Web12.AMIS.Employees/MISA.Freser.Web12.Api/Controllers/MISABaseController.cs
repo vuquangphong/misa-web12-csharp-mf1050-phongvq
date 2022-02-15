@@ -207,6 +207,34 @@ namespace MISA.Fresher.Web12.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// @method: PATCH(DEL) /Entities/{entityIds}
+        /// @desc: Remove multiple Entities by an array of Ids
+        /// @author: Vũ Quang Phong (14/02/2022)
+        /// </summary>
+        /// <param name="entityIds"></param>
+        /// <returns>
+        /// A Message
+        /// </returns>
+        [HttpPatch]
+        public IActionResult DeleteMulti(string[] entityIds)
+        {
+            try
+            {
+                var rowsEffect = _baseServices.DeleteMultiService(entityIds);
+
+                if (rowsEffect > 0)
+                {
+                    return Ok(rowsEffect);
+                }
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return CatchException(ex);
+            }
+        }
+
         #endregion
     }
 }
