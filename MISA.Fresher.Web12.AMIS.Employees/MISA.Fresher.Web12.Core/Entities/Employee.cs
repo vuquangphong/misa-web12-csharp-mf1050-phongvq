@@ -27,6 +27,7 @@ namespace MISA.Fresher.Web12.Core.Entities
         [NotEmpty]
         [NotDuplicated]
         [PropsName("Mã nhân viên")]
+        [FormatCode]
         public string? EmployeeCode { get; set; }
 
         // First name of Employee
@@ -56,8 +57,8 @@ namespace MISA.Fresher.Web12.Core.Entities
 
         /// <summary>
         /// Gender of Employee
-        /// Gender = 0 --> Female
-        /// Gender = 1 --> Male
+        /// Gender = Core.Enum.MISAEnum.Gender.Female --> Female
+        /// Gender = Core.Enum.MISAEnum.Gender.Male --> Male
         /// </summary>
         public Gender? Gender { get; set; }
 
@@ -68,18 +69,23 @@ namespace MISA.Fresher.Web12.Core.Entities
         public string? TelephoneNumber { get; set; }
 
         // Email of Employee
+        [FormatEmail]
         public string? Email { get; set; }
 
         // Address of Employee
         public string? Address { get; set; }
 
         // Date of birth of Employee
+        [FormatDate]
+        [PropsName("Ngày sinh")]
         public DateTime? DateOfBirth { get; set; }
 
         // Identity Number of Employee
         public string? IdentityNumber { get; set; }
 
         // Identity Date of Employee
+        [FormatDate]
+        [PropsName("Ngày cấp")]
         public DateTime? IdentityDate { get; set; }
 
         // Identity Place of Employee
@@ -106,9 +112,13 @@ namespace MISA.Fresher.Web12.Core.Entities
         public CustomerOrSupplier? CustomerOrSupplier { get; set; }
 
         // The point of time that Employee is created
+        [FormatDate]
+        [PropsName("Ngày tạo bản ghi")]
         public DateTime? CreatedDate { get; set; }
 
         // The point of time that Employee is modified
+        [FormatDate]
+        [PropsName("Ngày sửa bản ghi")]
         public DateTime? ModifiedDate { get; set; }
 
         #endregion

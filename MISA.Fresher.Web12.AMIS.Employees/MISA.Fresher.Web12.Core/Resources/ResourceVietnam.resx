@@ -126,4 +126,10 @@
   <data name="UserMsgServerError" xml:space="preserve">
     <value>Đã có lỗi xảy ra, vui lòng liên hệ với MISA!</value>
   </data>
+  <data name="WrongDateFormat" xml:space="preserve">
+    <value>{0} không được lớn hơn ngày hiện tại.</value>
+  </data>
+  <data name="WrongFormat" xml:space="preserve">
+    <value>{0} không đúng định dạng.</value>
+  </data>
 </root>

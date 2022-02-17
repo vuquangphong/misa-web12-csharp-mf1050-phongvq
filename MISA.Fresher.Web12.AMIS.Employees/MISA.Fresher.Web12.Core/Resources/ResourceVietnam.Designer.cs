@@ -86,5 +86,23 @@ namespace MISA.Fresher.Web12.Core.Resources {
                 return ResourceManager.GetString("UserMsgServerError", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} không được lớn hơn ngày hiện tại..
+        /// </summary>
+        public static string WrongDateFormat {
+            get {
+                return ResourceManager.GetString("WrongDateFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} không đúng định dạng..
+        /// </summary>
+        public static string WrongFormat {
+            get {
+                return ResourceManager.GetString("WrongFormat", resourceCulture);
+            }
+        }
     }
 }

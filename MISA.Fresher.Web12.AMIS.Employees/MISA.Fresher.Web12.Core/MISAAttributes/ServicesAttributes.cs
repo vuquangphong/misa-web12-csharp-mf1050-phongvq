@@ -39,4 +39,30 @@ namespace MISA.Fresher.Web12.Core.MISAAttributes
         }
     }
 
+    /// <summary>
+    /// @author: Vũ Quang Phong (11/02/2022)
+    /// @desc: Prop for Format Code
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property)]
+    public class FormatCode : Attribute
+    {
+    }
+
+    /// <summary>
+    /// @author: Vũ Quang Phong (11/02/2022)
+    /// @desc: Prop for Format Email
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property)]
+    public class FormatEmail : Attribute
+    {
+    }
+
+    /// <summary>
+    /// @author: Vũ Quang Phong (11/02/2022)
+    /// @desc: Prop for Format Date
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property)]
+    public class FormatDate : Attribute
+    {
+    }
 }
