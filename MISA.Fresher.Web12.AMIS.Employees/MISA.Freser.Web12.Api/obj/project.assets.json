@@ -5215,11 +5215,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\thapq\\MISA-TRAINING\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Freser.Web12.Api\\MISA.Fresher.Web12.Api.csproj",
+      "projectUniqueName": "C:\\Users\\thapq\\MISA-TRAINING (GĐ1)\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Freser.Web12.Api\\MISA.Fresher.Web12.Api.csproj",
       "projectName": "MISA.Fresher.Web12.Api",
-      "projectPath": "C:\\Users\\thapq\\MISA-TRAINING\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Freser.Web12.Api\\MISA.Fresher.Web12.Api.csproj",
+      "projectPath": "C:\\Users\\thapq\\MISA-TRAINING (GĐ1)\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Freser.Web12.Api\\MISA.Fresher.Web12.Api.csproj",
       "packagesPath": "C:\\Users\\thapq\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\thapq\\MISA-TRAINING\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Freser.Web12.Api\\obj\\",
+      "outputPath": "C:\\Users\\thapq\\MISA-TRAINING (GĐ1)\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Freser.Web12.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\thapq\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5236,11 +5236,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\thapq\\MISA-TRAINING\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Core\\MISA.Fresher.Web12.Core.csproj": {
-              "projectPath": "C:\\Users\\thapq\\MISA-TRAINING\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Core\\MISA.Fresher.Web12.Core.csproj"
+            "C:\\Users\\thapq\\MISA-TRAINING (GĐ1)\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Core\\MISA.Fresher.Web12.Core.csproj": {
+              "projectPath": "C:\\Users\\thapq\\MISA-TRAINING (GĐ1)\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Core\\MISA.Fresher.Web12.Core.csproj"
             },
-            "C:\\Users\\thapq\\MISA-TRAINING\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Infrastructure\\MISA.Fresher.Web12.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\thapq\\MISA-TRAINING\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Infrastructure\\MISA.Fresher.Web12.Infrastructure.csproj"
+            "C:\\Users\\thapq\\MISA-TRAINING (GĐ1)\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Infrastructure\\MISA.Fresher.Web12.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\thapq\\MISA-TRAINING (GĐ1)\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Infrastructure\\MISA.Fresher.Web12.Infrastructure.csproj"
             }
           }
         }

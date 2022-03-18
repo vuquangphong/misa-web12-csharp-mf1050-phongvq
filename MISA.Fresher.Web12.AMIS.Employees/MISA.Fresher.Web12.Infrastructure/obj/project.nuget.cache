@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LqfWpQMGqtU+lC3bDaBgWsKLc6ZY15u5IXAGKEdIgeDsX05YYkm6CGgjKBX/SsWKV9gsTgGAgysxrm4X7rP+kg==",
+  "dgSpecHash": "5OLKqvNpEGsUn8yCS0idZ6F6wisWa8Q0Epl4AUPQyK7SwpKiJ29WZv/V85YYzGBd3UTBLs1Qd6ek7Zl/muMI0Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\thapq\\MISA-TRAINING\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Infrastructure\\MISA.Fresher.Web12.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\thapq\\MISA-TRAINING (GĐ1)\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Infrastructure\\MISA.Fresher.Web12.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thapq\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\thapq\\.nuget\\packages\\mysqlconnector\\2.1.2\\mysqlconnector.2.1.2.nupkg.sha512"
