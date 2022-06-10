@@ -137,7 +137,9 @@ namespace MISA.Fresher.Web12.Controllers
                 }
 
                 // Put Employees data in the grid
-                var employees = _employeeRepository.GetAllEmployees();
+                //var employees = _employeeRepository.GetAllEmployees();
+
+                var employees = _employeeRepository.GetAll();
                 int currentRow = 4;
                 foreach (var (employee, index) in employees.Select((employee, index) => (employee, index)))
                 {
@@ -187,8 +189,8 @@ namespace MISA.Fresher.Web12.Controllers
                     // Return the file to client
                     return File(
                         content, 
-                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", 
-                        "Danh sách nhân viên.xlsx"
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        Core.Resources.ResourceVietnam.EmployeesListExcelFileName
                     );
 
                 }
@@ -201,7 +203,7 @@ namespace MISA.Fresher.Web12.Controllers
         /// @desc: Search for Employees by employeeFilter (code, name, phonenumber)
         /// Get Paging
         /// @author: Vũ Quang Phong (20/01/2022)
-        /// @edited_by: Vũ Quang Phong (13/02/2022)
+        /// @edited: Vũ Quang Phong (13/02/2022)
         /// </summary>
         /// <param name="employeeFilter"></param>
         /// <returns>

@@ -61,6 +61,15 @@ namespace MISA.Fresher.Web12.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Danh sách nhân viên.xlsx.
+        /// </summary>
+        public static string EmployeesListExcelFileName {
+            get {
+                return ResourceManager.GetString("EmployeesListExcelFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} đã tồn tại, vui lòng nhập lại!.
         /// </summary>
         public static string PropNotDuplicated {

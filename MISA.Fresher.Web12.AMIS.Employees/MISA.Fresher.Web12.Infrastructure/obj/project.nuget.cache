@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "5OLKqvNpEGsUn8yCS0idZ6F6wisWa8Q0Epl4AUPQyK7SwpKiJ29WZv/V85YYzGBd3UTBLs1Qd6ek7Zl/muMI0Q==",
+  "dgSpecHash": "mHgvDeJA992qj5n353O1ntqKoy/sPymWmjn1F5+4PnGsItM8sqpqGhTQRpPqRHhTB/isoeSwg7Bs9MQXN15wGA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\thapq\\MISA-TRAINING (GĐ1)\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Infrastructure\\MISA.Fresher.Web12.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\thapq\\MISA-TRAINING-GĐ1\\WEB.2021.12\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Infrastructure\\MISA.Fresher.Web12.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thapq\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
-    "C:\\Users\\thapq\\.nuget\\packages\\mysqlconnector\\2.1.2\\mysqlconnector.2.1.2.nupkg.sha512"
+    "C:\\Users\\thapq\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\thapq\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\thapq\\.nuget\\packages\\mysqlconnector\\2.1.2\\mysqlconnector.2.1.2.nupkg.sha512",
+    "C:\\Users\\thapq\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

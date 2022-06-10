@@ -27,7 +27,7 @@ namespace MISA.Fresher.Web12.Api.Controllers
 
         /// <summary>
         /// @desc: Catching Exceptions from Server Errors
-        /// @author: Vũ Quang Phong (28/01/2022)
+        /// @author: VQPhong (28/01/2022)
         /// </summary>
         /// <param name="ex"></param>
         /// <returns>
@@ -50,7 +50,8 @@ namespace MISA.Fresher.Web12.Api.Controllers
         /// <summary>
         /// @method: GET /Entities
         /// @desc: Get the Info of all Entities
-        /// @author: Vũ Quang Phong (28/01/2022)
+        /// @author: VQPhong (28/01/2022)
+        /// @modified: VQPhong (03/06/2022)
         /// </summary>
         /// <returns>
         /// An array of Entities
@@ -62,7 +63,7 @@ namespace MISA.Fresher.Web12.Api.Controllers
             {
                 var entities = _baseServices.GetAllService();
 
-                if (entities == null)
+                if (entities  == null || entities?.Count() == 0)
                 {
                     return NoContent();
                 }

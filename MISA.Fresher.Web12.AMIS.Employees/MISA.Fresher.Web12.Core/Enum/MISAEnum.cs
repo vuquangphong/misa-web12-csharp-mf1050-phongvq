@@ -8,7 +8,7 @@ namespace MISA.Fresher.Web12.Core.Enum
 {
     /// <summary>
     /// @desc: Enum Gender
-    /// @author: Vũ Quang Phong (28/01/2022)
+    /// @author: VQPhong (28/01/2022)
     /// </summary>
     public enum Gender
     {
@@ -18,7 +18,7 @@ namespace MISA.Fresher.Web12.Core.Enum
 
     /// <summary>
     /// @desc: Enum Marital Status
-    /// @author: Vũ Quang Phong (28/01/2022)
+    /// @author: VQPhong (28/01/2022)
     /// </summary>
     public enum MaritalStatus
     {
@@ -29,7 +29,7 @@ namespace MISA.Fresher.Web12.Core.Enum
 
     /// <summary>
     /// @desc: Enum Work Status
-    /// @author: Vũ Quang Phong (28/01/2022)
+    /// @author: VQPhong (28/01/2022)
     /// </summary>
     public enum WorkStatus
     {
@@ -39,7 +39,7 @@ namespace MISA.Fresher.Web12.Core.Enum
 
     /// <summary>
     /// @desc: Enum Customer or Supplier
-    /// @author: Vũ Quang Phong (28/01/2022)
+    /// @author: VQPhong (28/01/2022)
     /// </summary>
     public enum CustomerOrSupplier
     {
@@ -47,5 +47,17 @@ namespace MISA.Fresher.Web12.Core.Enum
         Customer = 1,
         Supplier = 2,
         Both = 3,
+    }
+
+    /// <summary>
+    /// @desc: Enum Self-defined Status Code
+    /// @author: VQPhong (08/06/2022)
+    /// </summary>
+    public enum CustomizeStatusCode
+    {
+        GetOkay = 10,
+        Created = 11,
+        Updated = 12,
+        Deleted = 13,
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.Extensions.Configuration;
 using MISA.Fresher.Web12.Core.Interfaces.Infrastructure;
 using MySqlConnector;
 using System;
@@ -14,38 +15,26 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
     {
         #region Some properties
 
-        // Information of  Database
-        private const string _server = "13.229.200.157";
-        private const string _port = "3306";
-        private const string _database = "WEB12.2021.MISA.PHONGVQ";
-        private const string _user_id = "dev";
-        private const string _password = "12345678";
-
+        private readonly string _connectionString;
+        private readonly IConfiguration _configuration;
         private readonly string _entityName = typeof(T).Name;
 
         protected MySqlConnection? SqlConnection;
         protected DynamicParameters? DynamicParams;
 
+        /// <summary>
+        /// @desc: Constructor for Passing (Injection) connection string from appsettings.json
+        /// @author: VQPhong (08/06/2022)
+        /// </summary>
+        /// <param name="configuration"></param>
+        public BaseRepository(IConfiguration configuration)
+        {
+            _connectionString = configuration.GetConnectionString("VQPHONG");
+        }
+
         #endregion
 
         #region Support Methods
-
-        /// <summary>
-        /// @desc: Create the connection string from Database Info
-        /// @author: Vũ Quang Phong (21/01/2022)
-        /// </summary>
-        /// <returns>
-        /// The connection string
-        /// </returns>
-        private static string GetConnectionString()
-        {
-            return "" +
-                $"Server = '{_server}'; " +
-                $"Port = '{_port}'; " +
-                $"Database = '{_database}'; " +
-                $"User Id = '{_user_id}'; " +
-                $"Password = '{_password}'";
-        }
 
         /// <summary>
         /// @desc: Create MySQL Connection from Connection string
@@ -54,13 +43,10 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
         /// <returns>
         /// The MySqlConnection
         /// </returns>
-        protected static MySqlConnection ConnectDatabase()
+        protected MySqlConnection ConnectDatabase()
         {
-            // Declare the info of Database
-            string connectionString = GetConnectionString();
-
             // Initital Connection
-            var sqlConnection = new MySqlConnection(connectionString);
+            var sqlConnection = new MySqlConnection(_connectionString);
 
             return sqlConnection;
         }
@@ -73,7 +59,13 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
         {
             using (SqlConnection = ConnectDatabase())
             {
-                var entities = SqlConnection.Query<T>($"SELECT * FROM {_entityName} ORDER BY CreatedDate DESC");
+                string sqlString = $"Proc_GetAll{_entityName}";
+
+                var entities = SqlConnection.Query<T>(
+                    sqlString,
+                    commandType: CommandType.StoredProcedure
+                ).ToList();
+
                 return entities;
             }
         }
@@ -84,11 +76,16 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
             {
                 // Create dynamic parameters
                 DynamicParams = new DynamicParameters();
-                DynamicParams.Add($"@{_entityName}Id", entityId);
+                DynamicParams.Add($"@m_{_entityName}Id", entityId);
 
                 // Query data in database
-                var sqlQuery = $"SELECT * FROM {_entityName} WHERE {_entityName}Id = @{_entityName}Id";
-                var entity = SqlConnection.QueryFirstOrDefault<T>(sqlQuery, param: DynamicParams);
+                var sqlQuery = $"Proc_Get{_entityName}ById";
+
+                var entity = SqlConnection.QueryFirstOrDefault<T>(
+                    sqlQuery,
+                    param: DynamicParams,
+                    commandType: CommandType.StoredProcedure
+                );
 
                 return entity;
             }
@@ -210,7 +207,7 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
                     }
 
                 }
-                
+
                 var sqlCheck = $"SELECT {_entityName}Code FROM {_entityName} WHERE {_entityName}Code = @{_entityName}Code";
                 var isExist = SqlConnection.QueryFirstOrDefault(sqlCheck, param: DynamicParams);
 
@@ -218,8 +215,8 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
                 {
                     return false;
                 }
-                return true;         
-               
+                return true;
+
             }
         }
 
@@ -229,11 +226,11 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
             {
                 // Create dynamic parameters
                 DynamicParams = new DynamicParameters();
-                DynamicParams.Add($"@{_entityName}Id", entityId);
+                DynamicParams.Add($"@m_{_entityName}Id", entityId);
 
                 // Query data in Database
-                var sqlQuery = $"DELETE FROM {_entityName} WHERE {_entityName}Id = @{_entityName}Id";
-                var rowsEffect = SqlConnection.Execute(sqlQuery, param: DynamicParams);
+                var sqlQuery = $"Proc_Delete{_entityName}ById";
+                var rowsEffect = SqlConnection.Execute(sqlQuery, param: DynamicParams, commandType: CommandType.StoredProcedure);
 
                 return rowsEffect;
             }
@@ -242,24 +239,51 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
         public int DeleteMultiById(string[] entityIds)
         {
             // Init query string
-            StringBuilder idCompare = new StringBuilder();
+            //StringBuilder idCompare = new StringBuilder();
+
             string delimeter = "";
+            var concatIdString = new StringBuilder();
 
             DynamicParams = new DynamicParameters();
 
-            foreach (var (id, index) in entityIds.Select((id, index) => (id, index)))
-            {
-                DynamicParams.Add($"@{_entityName}Id{index}", id, DbType.String);
+            //foreach (var (id, index) in entityIds.Select((id, index) => (id, index)))
+            //{
+            //    DynamicParams.Add($"@{_entityName}Id{index}", id, DbType.String);
 
-                idCompare.Append($"{delimeter}{_entityName}Id = @{_entityName}Id{index}");
-                delimeter = " OR ";
+            //    // Method1: WHERE Id = ... OR Id = ... OR ...
+            //    //idCompare.Append($"{delimeter}{_entityName}Id = @{_entityName}Id{index}");
+            //    //delimeter = " OR ";
+
+            //    // Method2: WHERE Id IN (...)
+            //    idCompare.Append($"{delimeter}@{_entityName}Id{index}");
+            //    delimeter = ", ";
+            //}
+
+            // Method3: Using Stored Procedure
+            foreach (string id in entityIds)
+            {
+                concatIdString.Append($"{delimeter}{id}");
+                delimeter = ",";
             }
 
+            DynamicParams.Add($"@m_String{_entityName}Id", concatIdString, DbType.String);
+            DynamicParams.Add("@m_Delimiter", delimeter);
+
             // Query and Return
-            var sqlQuery = $"DELETE FROM {_entityName} WHERE {idCompare}";
+            //var sqlQuery = $"DELETE FROM {_entityName} WHERE {idCompare}";    // Method1
+
+            //var sqlQuery = $"DELETE FROM {_entityName} WHERE {_entityName}Id IN ({idCompare})";    // Method2
+
+            var sqlQuery = $"Proc_DeleteMulti{_entityName}ById";    // Method3
+
+            // --> Method2 is faster!
+            // --> Method3 [...TODO]
             using (SqlConnection = ConnectDatabase())
             {
-                var rowsEffect = SqlConnection.Execute(sqlQuery, param: DynamicParams);
+                //var rowsEffect = SqlConnection.Execute(sqlQuery, param: DynamicParams);
+
+                // Method3
+                var rowsEffect = SqlConnection.Execute(sqlQuery, param: DynamicParams, commandType: CommandType.StoredProcedure);
                 return rowsEffect;
             }
         }

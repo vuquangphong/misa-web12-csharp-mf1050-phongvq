@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7dUV7y0vy3Crqm5BYdhkFYHJaDlBrXv5XRjqqCe5mfkBhB8TX9f3Y0n+hmWyHu7j/Pf4XTb/Ql7X0Oggky9lrw==",
+  "dgSpecHash": "DlPGVokGQm51keO5xjbTdhiiLtnyGQPQTljUD6Ge5ZpwHwlSUgMWCXH/C0w5Cfn/WGys6T7UKlXVgulVOuYmWw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\thapq\\MISA-TRAINING (GĐ1)\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Freser.Web12.Api\\MISA.Fresher.Web12.Api.csproj",
+  "projectFilePath": "C:\\Users\\thapq\\MISA-TRAINING-GĐ1\\WEB.2021.12\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Freser.Web12.Api\\MISA.Fresher.Web12.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thapq\\.nuget\\packages\\closedxml\\0.95.4\\closedxml.0.95.4.nupkg.sha512",
     "C:\\Users\\thapq\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
@@ -12,6 +12,8 @@
     "C:\\Users\\thapq\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\6.0.1\\microsoft.aspnetcore.mvc.newtonsoftjson.6.0.1.nupkg.sha512",
     "C:\\Users\\thapq\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\thapq\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\thapq\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\thapq\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
     "C:\\Users\\thapq\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
     "C:\\Users\\thapq\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\thapq\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
@@ -75,6 +77,7 @@
     "C:\\Users\\thapq\\.nuget\\packages\\system.reflection.typeextensions\\4.3.0\\system.reflection.typeextensions.4.3.0.nupkg.sha512",
     "C:\\Users\\thapq\\.nuget\\packages\\system.resources.resourcemanager\\4.3.0\\system.resources.resourcemanager.4.3.0.nupkg.sha512",
     "C:\\Users\\thapq\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
+    "C:\\Users\\thapq\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\thapq\\.nuget\\packages\\system.runtime.extensions\\4.3.0\\system.runtime.extensions.4.3.0.nupkg.sha512",
     "C:\\Users\\thapq\\.nuget\\packages\\system.runtime.handles\\4.3.0\\system.runtime.handles.4.3.0.nupkg.sha512",
     "C:\\Users\\thapq\\.nuget\\packages\\system.runtime.interopservices\\4.3.0\\system.runtime.interopservices.4.3.0.nupkg.sha512",

@@ -8,18 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using Microsoft.Extensions.Configuration;
 
 namespace MISA.Fresher.Web12.Infrastructure.Repositories
 {
     public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
     {
-        public List<Employee> GetAllEmployees()
+        public EmployeeRepository(IConfiguration configuration) : base(configuration)
         {
-            using (SqlConnection = ConnectDatabase())
-            {
-                var employees = SqlConnection.Query<Employee>("Proc_GetAllEmployees", commandType: CommandType.StoredProcedure).ToList();
-                return employees;
-            }
         }
 
         public object GetEmployeesPaging(int? pageIndex, int? pageSize, string? employeeFilter)
@@ -34,7 +30,7 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
             using (SqlConnection = ConnectDatabase())
             {
                 var employeesPaging = SqlConnection.Query<Employee>(
-                    "Proc_GetEmployeesPaging", 
+                    "Proc_GetEmployeePaging", 
                     param: DynamicParams, 
                     commandType: CommandType.StoredProcedure
                 );

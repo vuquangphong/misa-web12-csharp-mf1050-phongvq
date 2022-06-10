@@ -14,15 +14,6 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Infrastructure
     public interface IEmployeeRepository : IBaseRepository<Employee>
     {
         /// <summary>
-        /// @author: Vũ Quang Phong (13/02/2022)
-        /// @desc: Get all Employees (join with Department and Position)
-        /// </summary>
-        /// <returns>
-        /// A list of Employees
-        /// </returns>
-        public List<Employee> GetAllEmployees();
-
-        /// <summary>
         /// @author: Vũ Quang Phong (04/02/2022)
         /// @desc: Get a list of Employees by PageIndex and PageSize, and/or searchText
         /// </summary>

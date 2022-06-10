@@ -178,7 +178,7 @@ namespace MISA.Fresher.Web12.Core.Services
             var formatCodeProps = entity.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(FormatCode)));
 
             // Regex Pattern for formatting code
-            var regex = new Regex(@"\A(NV-)+([0-9]{7})\Z");
+            var regex = new Regex(@"\A(NV-)+([0-9]{4})\Z");
 
             foreach (var prop in formatCodeProps)
             {

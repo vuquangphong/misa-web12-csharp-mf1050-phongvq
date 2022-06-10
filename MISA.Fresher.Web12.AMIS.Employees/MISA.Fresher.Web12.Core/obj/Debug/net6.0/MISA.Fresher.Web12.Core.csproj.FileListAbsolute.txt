@@ -12,3 +12,17 @@ C:\Users\thapq\MISA-TRAINING\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fres
 C:\Users\thapq\MISA-TRAINING\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Fresher.Web12.Core\obj\Debug\net6.0\MISA.Fresher.Web12.Core.pdb
 C:\Users\thapq\MISA-TRAINING\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Fresher.Web12.Core\obj\Debug\net6.0\MISA.Fresher.Web12.Core.Resources.ResourceVietnam.resources
 C:\Users\thapq\MISA-TRAINING\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Fresher.Web12.Core\obj\Debug\net6.0\MISA.Fresher.Web12.Core.csproj.GenerateResource.cache
+C:\Users\thapq\MISA-TRAINING-GĐ1\WEB.2021.12\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Fresher.Web12.Core\bin\Debug\net6.0\MISA.Fresher.Web12.Core.deps.json
+C:\Users\thapq\MISA-TRAINING-GĐ1\WEB.2021.12\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Fresher.Web12.Core\bin\Debug\net6.0\MISA.Fresher.Web12.Core.dll
+C:\Users\thapq\MISA-TRAINING-GĐ1\WEB.2021.12\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Fresher.Web12.Core\bin\Debug\net6.0\ref\MISA.Fresher.Web12.Core.dll
+C:\Users\thapq\MISA-TRAINING-GĐ1\WEB.2021.12\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Fresher.Web12.Core\bin\Debug\net6.0\MISA.Fresher.Web12.Core.pdb
+C:\Users\thapq\MISA-TRAINING-GĐ1\WEB.2021.12\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Fresher.Web12.Core\obj\Debug\net6.0\MISA.Fresher.Web12.Core.csproj.AssemblyReference.cache
+C:\Users\thapq\MISA-TRAINING-GĐ1\WEB.2021.12\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Fresher.Web12.Core\obj\Debug\net6.0\MISA.Fresher.Web12.Core.Resources.ResourceVietnam.resources
+C:\Users\thapq\MISA-TRAINING-GĐ1\WEB.2021.12\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Fresher.Web12.Core\obj\Debug\net6.0\MISA.Fresher.Web12.Core.csproj.GenerateResource.cache
+C:\Users\thapq\MISA-TRAINING-GĐ1\WEB.2021.12\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Fresher.Web12.Core\obj\Debug\net6.0\MISA.Fresher.Web12.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\thapq\MISA-TRAINING-GĐ1\WEB.2021.12\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Fresher.Web12.Core\obj\Debug\net6.0\MISA.Fresher.Web12.Core.AssemblyInfoInputs.cache
+C:\Users\thapq\MISA-TRAINING-GĐ1\WEB.2021.12\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Fresher.Web12.Core\obj\Debug\net6.0\MISA.Fresher.Web12.Core.AssemblyInfo.cs
+C:\Users\thapq\MISA-TRAINING-GĐ1\WEB.2021.12\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Fresher.Web12.Core\obj\Debug\net6.0\MISA.Fresher.Web12.Core.csproj.CoreCompileInputs.cache
+C:\Users\thapq\MISA-TRAINING-GĐ1\WEB.2021.12\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Fresher.Web12.Core\obj\Debug\net6.0\MISA.Fresher.Web12.Core.dll
+C:\Users\thapq\MISA-TRAINING-GĐ1\WEB.2021.12\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Fresher.Web12.Core\obj\Debug\net6.0\ref\MISA.Fresher.Web12.Core.dll
+C:\Users\thapq\MISA-TRAINING-GĐ1\WEB.2021.12\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Fresher.Web12.Core\obj\Debug\net6.0\MISA.Fresher.Web12.Core.pdb

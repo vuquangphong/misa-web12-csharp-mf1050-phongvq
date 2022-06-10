@@ -98,6 +98,33 @@
           "buildMultiTargeting/Microsoft.Extensions.ApiDescription.Server.targets": {}
         }
       },
+      "Microsoft.Extensions.Configuration.Abstractions/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "6.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Primitives/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/Microsoft.Extensions.Primitives.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.Primitives.dll": {}
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
+        }
+      },
       "Microsoft.NETCore.Platforms/2.0.0": {
         "type": "package",
         "compile": {
@@ -1011,6 +1038,18 @@
           "ref/netstandard1.5/System.Runtime.dll": {}
         }
       },
+      "System.Runtime.CompilerServices.Unsafe/6.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
+        }
+      },
       "System.Runtime.Extensions/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -1456,6 +1495,7 @@
         "dependencies": {
           "Dapper": "2.0.123",
           "MISA.Fresher.Web12.Core": "1.0.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.0",
           "MySqlConnector": "2.1.2"
         },
         "compile": {
@@ -1671,6 +1711,50 @@
         "tools/netcoreapp2.1/GetDocument.Insider.deps.json",
         "tools/netcoreapp2.1/GetDocument.Insider.dll",
         "tools/netcoreapp2.1/GetDocument.Insider.runtimeconfig.json"
+      ]
+    },
+    "Microsoft.Extensions.Configuration.Abstractions/6.0.0": {
+      "sha512": "qWzV9o+ZRWq+pGm+1dF+R7qTgTYoXvbyowRoBxQJGfqTpqDun2eteerjRQhq5PQ/14S+lqto3Ft4gYaRyl4rdQ==",
+      "type": "package",
+      "path": "microsoft.extensions.configuration.abstractions/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/Microsoft.Extensions.Configuration.Abstractions.dll",
+        "lib/net461/Microsoft.Extensions.Configuration.Abstractions.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Configuration.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Configuration.Abstractions.xml",
+        "microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
+        "microsoft.extensions.configuration.abstractions.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "Microsoft.Extensions.Primitives/6.0.0": {
+      "sha512": "9+PnzmQFfEFNR9J2aDTfJGGupShHjOuGw4VUv+JB044biSHrnmCIMD+mJHmb2H7YryrfBEXDurxQ47gJZdCKNQ==",
+      "type": "package",
+      "path": "microsoft.extensions.primitives/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/Microsoft.Extensions.Primitives.targets",
+        "buildTransitive/netcoreapp3.1/_._",
+        "lib/net461/Microsoft.Extensions.Primitives.dll",
+        "lib/net461/Microsoft.Extensions.Primitives.xml",
+        "lib/net6.0/Microsoft.Extensions.Primitives.dll",
+        "lib/net6.0/Microsoft.Extensions.Primitives.xml",
+        "lib/netcoreapp3.1/Microsoft.Extensions.Primitives.dll",
+        "lib/netcoreapp3.1/Microsoft.Extensions.Primitives.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Primitives.xml",
+        "microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+        "microsoft.extensions.primitives.nuspec",
+        "useSharedDesignerContext.txt"
       ]
     },
     "Microsoft.NETCore.Platforms/2.0.0": {
@@ -4069,6 +4153,31 @@
         "system.runtime.nuspec"
       ]
     },
+    "System.Runtime.CompilerServices.Unsafe/6.0.0": {
+      "sha512": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
+      "type": "package",
+      "path": "system.runtime.compilerservices.unsafe/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.targets",
+        "buildTransitive/netcoreapp3.1/_._",
+        "lib/net461/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/net461/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/net6.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netcoreapp3.1/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netcoreapp3.1/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+        "system.runtime.compilerservices.unsafe.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "System.Runtime.Extensions/4.3.0": {
       "sha512": "guW0uK0fn5fcJJ1tJVXYd7/1h5F+pea1r7FLSOz/f8vPEqbR2ZAknuRDvTQ8PzAilDveOxNjSfr0CHfIQfFk8g==",
       "type": "package",
@@ -5215,11 +5324,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\thapq\\MISA-TRAINING (GĐ1)\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Freser.Web12.Api\\MISA.Fresher.Web12.Api.csproj",
+      "projectUniqueName": "C:\\Users\\thapq\\MISA-TRAINING-GĐ1\\WEB.2021.12\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Freser.Web12.Api\\MISA.Fresher.Web12.Api.csproj",
       "projectName": "MISA.Fresher.Web12.Api",
-      "projectPath": "C:\\Users\\thapq\\MISA-TRAINING (GĐ1)\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Freser.Web12.Api\\MISA.Fresher.Web12.Api.csproj",
+      "projectPath": "C:\\Users\\thapq\\MISA-TRAINING-GĐ1\\WEB.2021.12\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Freser.Web12.Api\\MISA.Fresher.Web12.Api.csproj",
       "packagesPath": "C:\\Users\\thapq\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\thapq\\MISA-TRAINING (GĐ1)\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Freser.Web12.Api\\obj\\",
+      "outputPath": "C:\\Users\\thapq\\MISA-TRAINING-GĐ1\\WEB.2021.12\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Freser.Web12.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\thapq\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5236,11 +5345,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\thapq\\MISA-TRAINING (GĐ1)\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Core\\MISA.Fresher.Web12.Core.csproj": {
-              "projectPath": "C:\\Users\\thapq\\MISA-TRAINING (GĐ1)\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Core\\MISA.Fresher.Web12.Core.csproj"
+            "C:\\Users\\thapq\\MISA-TRAINING-GĐ1\\WEB.2021.12\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Core\\MISA.Fresher.Web12.Core.csproj": {
+              "projectPath": "C:\\Users\\thapq\\MISA-TRAINING-GĐ1\\WEB.2021.12\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Core\\MISA.Fresher.Web12.Core.csproj"
             },
-            "C:\\Users\\thapq\\MISA-TRAINING (GĐ1)\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Infrastructure\\MISA.Fresher.Web12.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\thapq\\MISA-TRAINING (GĐ1)\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Infrastructure\\MISA.Fresher.Web12.Infrastructure.csproj"
+            "C:\\Users\\thapq\\MISA-TRAINING-GĐ1\\WEB.2021.12\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Infrastructure\\MISA.Fresher.Web12.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\thapq\\MISA-TRAINING-GĐ1\\WEB.2021.12\\phong-ms-web2021-12\\MS.WEB2021_12-BACKEND\\MISA.Fresher.Web12.AMIS.Employees\\MISA.Fresher.Web12.Infrastructure\\MISA.Fresher.Web12.Infrastructure.csproj"
             }
           }
         }
