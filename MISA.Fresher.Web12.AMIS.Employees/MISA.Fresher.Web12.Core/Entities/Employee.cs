@@ -21,6 +21,7 @@ namespace MISA.Fresher.Web12.Core.Entities
         #region Properties
 
         // Primary Key
+        [PrimaryKey]
         public Guid? EmployeeId { get; set; }
 
         // Employee Code

@@ -70,6 +70,24 @@ namespace MISA.Fresher.Web12.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nữ.
+        /// </summary>
+        public static string Female {
+            get {
+                return ResourceManager.GetString("Female", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nam.
+        /// </summary>
+        public static string Male {
+            get {
+                return ResourceManager.GetString("Male", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} đã tồn tại, vui lòng nhập lại!.
         /// </summary>
         public static string PropNotDuplicated {

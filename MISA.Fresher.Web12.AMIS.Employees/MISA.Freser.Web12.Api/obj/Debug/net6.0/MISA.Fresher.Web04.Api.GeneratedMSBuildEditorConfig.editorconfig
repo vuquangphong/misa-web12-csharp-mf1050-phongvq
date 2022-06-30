@@ -1,0 +1,16 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = MISA.Fresher.Web04.Api
+build_property.RootNamespace = MISA.Fresher.Web04.Api
+build_property.ProjectDir = C:\Users\thapq\MISA-TRAINING-GĐ1\WEB.2021.12\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Freser.Web12.Api\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\thapq\MISA-TRAINING-GĐ1\WEB.2021.12\phong-ms-web2021-12\MS.WEB2021_12-BACKEND\MISA.Fresher.Web12.AMIS.Employees\MISA.Freser.Web12.Api
+build_property._RazorSourceGeneratorDebug = 

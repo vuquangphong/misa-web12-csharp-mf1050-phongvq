@@ -59,5 +59,8 @@ namespace MISA.Fresher.Web12.Core.Enum
         Created = 11,
         Updated = 12,
         Deleted = 13,
+        NoContent = 14,
+        BadRequest = 40,
+        NormalException = 55,
     }
 }

@@ -30,7 +30,7 @@ namespace MISA.Fresher.Web12.Controllers
         #region Support Export Excel
 
         // List of headers
-        private readonly string[] theads = {"STT", "Mã nhân viên", "Tên nhân viên", "Giới tính", "Ngày sinh", "Số CMND", 
+        private readonly string[] theads = {"STT", "Mã nhân viên", "Tên nhân viên", "Giới tính", "Ngày sinh", "Số CMND",
             "Chức danh", "Tên đơn vị", "Số tài khoản", "Tên ngân hàng", "Chi nhánh TK ngân hàng"};
 
         /// <summary>
@@ -104,7 +104,8 @@ namespace MISA.Fresher.Web12.Controllers
         /// <summary>
         /// @method: GET /Employees/excel
         /// @desc: Export Employees Data into Excel file
-        /// @author: Vũ Quang Phong (12/02/2022)
+        /// @author: VQPhong (12/02/2022)
+        /// @modified: VQPhong (24/06/2022)
         /// </summary>
         /// <returns>
         /// The Excel file
@@ -137,14 +138,12 @@ namespace MISA.Fresher.Web12.Controllers
                 }
 
                 // Put Employees data in the grid
-                //var employees = _employeeRepository.GetAllEmployees();
-
                 var employees = _employeeRepository.GetAll();
                 int currentRow = 4;
                 foreach (var (employee, index) in employees.Select((employee, index) => (employee, index)))
                 {
                     string dateTemp = "";
-                    if (employee.DateOfBirth != null) 
+                    if (employee.DateOfBirth != null)
                     {
                         dateTemp = FormatDate((DateTime)employee.DateOfBirth);
                     }
@@ -152,7 +151,7 @@ namespace MISA.Fresher.Web12.Controllers
                     worksheet.Cell(currentRow, 1).Value = index + 1;
                     worksheet.Cell(currentRow, 2).Value = employee.EmployeeCode;
                     worksheet.Cell(currentRow, 3).Value = employee.EmployeeName.ToUpper();
-                    worksheet.Cell(currentRow, 4).Value = employee.Gender == Core.Enum.Gender.Male ? "Nam" : "Nữ";
+                    worksheet.Cell(currentRow, 4).Value = employee.Gender == Core.Enum.Gender.Male ? Core.Resources.ResourceVietnam.Male : Core.Resources.ResourceVietnam.Female;
 
                     worksheet.Cell(currentRow, 5).Value = dateTemp;
 
@@ -168,7 +167,7 @@ namespace MISA.Fresher.Web12.Controllers
 
                 // Style range data
                 var rangeData = worksheet.Range($"A4:K{currentRow - 1}");
-                StyleBorder(rangeData); 
+                StyleBorder(rangeData);
                 rangeData.Style.Font.SetFontName("Times New Roman");
 
                 // Set width of columns
@@ -188,22 +187,21 @@ namespace MISA.Fresher.Web12.Controllers
 
                     // Return the file to client
                     return File(
-                        content, 
+                        content,
                         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                         Core.Resources.ResourceVietnam.EmployeesListExcelFileName
                     );
 
                 }
             }
-
         }
 
         /// <summary>
         /// @method: GET /Employees/filter?employeeFilter=...
         /// @desc: Search for Employees by employeeFilter (code, name, phonenumber)
         /// Get Paging
-        /// @author: Vũ Quang Phong (20/01/2022)
-        /// @edited: Vũ Quang Phong (13/02/2022)
+        /// @author: VQPhong (20/01/2022)
+        /// @edited: VQPhong (24/06/2022)
         /// </summary>
         /// <param name="employeeFilter"></param>
         /// <returns>
@@ -212,18 +210,10 @@ namespace MISA.Fresher.Web12.Controllers
         [HttpGet("filter")]
         public IActionResult GetPaging(int? pageIndex, int? pageSize, string? employeeFilter)
         {
-            try
-            {
-                var dataEmployees = _employeeServices.GetEmployeesPaging(pageIndex, pageSize, employeeFilter);
-
-                return Ok(dataEmployees);
-            }
-            catch (Exception ex)
-            {
-                return CatchException(ex);
-            }
+            var res = _employeeServices.GetEmployeesPaging(pageIndex, pageSize, employeeFilter);
+            return Ok(res);
         }
 
-        #endregion Main Controllers
+        #endregion
     }
 }

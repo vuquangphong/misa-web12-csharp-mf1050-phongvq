@@ -10,6 +10,7 @@ namespace MISA.Fresher.Web12.Core.Entities
     public class PositionE
     {
         // Primary Key
+        [PrimaryKey]
         public Guid? PositionEId { get; set; }
 
         // Position Code

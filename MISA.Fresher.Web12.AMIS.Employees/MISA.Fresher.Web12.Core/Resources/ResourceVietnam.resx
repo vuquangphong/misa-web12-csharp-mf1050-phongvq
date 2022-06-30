@@ -120,6 +120,12 @@
   <data name="EmployeesListExcelFileName" xml:space="preserve">
     <value>Danh sách nhân viên.xlsx</value>
   </data>
+  <data name="Female" xml:space="preserve">
+    <value>Nữ</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Nam</value>
+  </data>
   <data name="PropNotDuplicated" xml:space="preserve">
     <value>{0} đã tồn tại, vui lòng nhập lại!</value>
   </data>

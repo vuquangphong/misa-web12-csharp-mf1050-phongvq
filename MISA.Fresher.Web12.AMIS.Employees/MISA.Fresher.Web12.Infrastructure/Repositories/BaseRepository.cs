@@ -93,11 +93,6 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
 
         public int Insert(T entity)
         {
-            // Sql string query
-            var sqlColumnsName = new StringBuilder();
-            var sqlColumnsValue = new StringBuilder();
-            string delimiter = "";
-
             // Create dynamic parameters
             DynamicParams = new DynamicParameters();
 
@@ -111,23 +106,23 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
 
                 if (propertyType == typeof(Guid) || propertyType == typeof(Guid?))
                 {
-                    DynamicParams.Add($"@{propertyName}", propertyValue, DbType.String);
+                    DynamicParams.Add($"@m_{propertyName}", propertyValue, DbType.String);
                 }
                 else
                 {
-                    DynamicParams.Add($"@{propertyName}", propertyValue);
+                    DynamicParams.Add($"@m_{propertyName}", propertyValue);
                 }
-
-                sqlColumnsName.Append($"{delimiter}{propertyName}");
-                sqlColumnsValue.Append($"{delimiter}@{propertyName}");
-                delimiter = ", ";
             }
 
-            var sqlQuery = $"INSERT INTO {_entityName}({sqlColumnsName}) VALUES ({sqlColumnsValue})";
+            var sqlQuery = $"Proc_Create{_entityName}";
 
             using (SqlConnection = ConnectDatabase())
             {
-                var rowsEffect = SqlConnection.Execute(sqlQuery, param: DynamicParams);
+                var rowsEffect = SqlConnection.Execute(
+                    sqlQuery,
+                    param: DynamicParams,
+                    commandType: CommandType.StoredProcedure
+                );
 
                 return rowsEffect;
             }
@@ -135,13 +130,9 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
 
         public int UpdateById(T entity, Guid entityId)
         {
-            // Sql string query
-            var sqlSetColumns = new StringBuilder();
-            string delimiter = "";
-
             // Create dynamic parameters
             DynamicParams = new DynamicParameters();
-            DynamicParams.Add($"@{_entityName}Id", entityId, DbType.String);
+            DynamicParams.Add($"@m_{_entityName}Id", entityId, DbType.String);
 
             var properties = entity.GetType().GetProperties();
 
@@ -157,23 +148,24 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
 
                 if (propertyType == typeof(Guid) || propertyType == typeof(Guid?))
                 {
-                    DynamicParams.Add($"@{propertyName}", propertyValue, DbType.String);
+                    DynamicParams.Add($"@m_{propertyName}", propertyValue, DbType.String);
                 }
                 else
                 {
-                    DynamicParams.Add($"@{propertyName}", propertyValue);
+                    DynamicParams.Add($"@m_{propertyName}", propertyValue);
                 }
-
-                sqlSetColumns.Append($"{delimiter}{propertyName} = @{propertyName}");
-                delimiter = ", ";
             }
 
             // Query data in database
-            var sqlQuery = $"UPDATE {_entityName} SET {sqlSetColumns} WHERE {_entityName}Id = @{_entityName}Id";
+            var sqlQuery = $"Proc_Update{_entityName}";
 
             using (SqlConnection = ConnectDatabase())
             {
-                var rowsEffect = SqlConnection.Execute(sqlQuery, param: DynamicParams);
+                var rowsEffect = SqlConnection.Execute(
+                    sqlQuery,
+                    param: DynamicParams,
+                    commandType: CommandType.StoredProcedure
+                );
 
                 return rowsEffect;
             }
@@ -190,7 +182,7 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
                 {
                     DynamicParams.Add($"@{_entityName}Id", entityId);
 
-                    var sqlQuery = $"SELECT * FROM {_entityName} WHERE {_entityName}Id = @{_entityName}Id";
+                    var sqlQuery = $"SELECT {_entityName}Code FROM {_entityName} WHERE {_entityName}Id = @{_entityName}Id";
                     var currentEntity = SqlConnection.QueryFirstOrDefault<T>(sqlQuery, param: DynamicParams);
                     var propsCurEntity = currentEntity.GetType().GetProperties();
 
@@ -205,7 +197,6 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
                             }
                         }
                     }
-
                 }
 
                 var sqlCheck = $"SELECT {_entityName}Code FROM {_entityName} WHERE {_entityName}Code = @{_entityName}Code";
@@ -230,7 +221,11 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
 
                 // Query data in Database
                 var sqlQuery = $"Proc_Delete{_entityName}ById";
-                var rowsEffect = SqlConnection.Execute(sqlQuery, param: DynamicParams, commandType: CommandType.StoredProcedure);
+                var rowsEffect = SqlConnection.Execute(
+                    sqlQuery, 
+                    param: DynamicParams, 
+                    commandType: CommandType.StoredProcedure
+                );
 
                 return rowsEffect;
             }
@@ -269,21 +264,15 @@ namespace MISA.Fresher.Web12.Infrastructure.Repositories
             DynamicParams.Add($"@m_String{_entityName}Id", concatIdString, DbType.String);
             DynamicParams.Add("@m_Delimiter", delimeter);
 
-            // Query and Return
-            //var sqlQuery = $"DELETE FROM {_entityName} WHERE {idCompare}";    // Method1
+            var sqlQuery = $"Proc_DeleteMulti{_entityName}ById";
 
-            //var sqlQuery = $"DELETE FROM {_entityName} WHERE {_entityName}Id IN ({idCompare})";    // Method2
-
-            var sqlQuery = $"Proc_DeleteMulti{_entityName}ById";    // Method3
-
-            // --> Method2 is faster!
-            // --> Method3 [...TODO]
             using (SqlConnection = ConnectDatabase())
             {
-                //var rowsEffect = SqlConnection.Execute(sqlQuery, param: DynamicParams);
-
-                // Method3
-                var rowsEffect = SqlConnection.Execute(sqlQuery, param: DynamicParams, commandType: CommandType.StoredProcedure);
+                var rowsEffect = SqlConnection.Execute(
+                    sqlQuery,
+                    param: DynamicParams,
+                    commandType: CommandType.StoredProcedure
+                );
                 return rowsEffect;
             }
         }

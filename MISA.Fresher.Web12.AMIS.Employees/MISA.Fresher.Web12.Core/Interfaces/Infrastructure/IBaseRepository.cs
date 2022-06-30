@@ -10,6 +10,7 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Infrastructure
     {
         /// <summary>
         /// @author: VQPhong (21/01/2022)
+        /// @modified: VQPhong (09/06/2022)
         /// @desc: Getting all the Entities <T> from Database
         /// </summary>
         /// <returns>
@@ -19,6 +20,7 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Infrastructure
 
         /// <summary>
         /// @author: VQPhong (21/01/2022)
+        /// @modified: VQPhong (09/06/2022)
         /// @desc: Getting an Entity <T> from Database by Id
         /// </summary>
         /// <param name="entityId"></param>
@@ -63,6 +65,7 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Infrastructure
 
         /// <summary>
         /// @author: VQPhong (21/01/2022)
+        /// @modified: VQPhong (09/06/2022)
         /// @desc: Removing an Entity from Database
         /// </summary>
         /// <param name="entityId"></param>
@@ -73,7 +76,7 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Infrastructure
 
         /// <summary>
         /// @author: VQPhong (14/02/2022)
-        /// @edited: VQPhong (03/06/2022)
+        /// @modified: VQPhong (10/06/2022)
         /// @desc: Removing Multiple Entities by an array of Ids
         /// </summary>
         /// <param name="entityIds"></param>

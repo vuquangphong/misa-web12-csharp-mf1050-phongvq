@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace MISA.Fresher.Web12.Core.MISAAttributes
 {
+    [AttributeUsage(AttributeTargets.Property)]
+    public class PrimaryKey : Attribute
+    {
+    }
     /// <summary>
     /// @author: Vũ Quang Phong (26/01/2022)
     /// @desc: Marking the Properties that are not allowed Empty

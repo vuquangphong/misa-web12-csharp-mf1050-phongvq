@@ -2,6 +2,7 @@
 using MISA.Fresher.Web12.Core.Interfaces.Infrastructure;
 using MISA.Fresher.Web12.Core.Interfaces.Services;
 using MISA.Fresher.Web12.Core.MISAAttributes;
+using MISA.Fresher.Web12.Core.OtherModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,69 +27,114 @@ namespace MISA.Fresher.Web12.Core.Services
 
         #region Main Functions
 
-        public IEnumerable<T> GetAllService()
+        public ControllerResponseData GetAllData()
         {
-            return _baseRepository.GetAll();
+            var data = _baseRepository.GetAll();
+
+            var res = new ControllerResponseData
+            {
+                customStatusCode = (int?)(data == null || data?.Count() == 0 ? Core.Enum.CustomizeStatusCode.NoContent : Core.Enum.CustomizeStatusCode.GetOkay),
+                responseData = data
+            };
+
+            return res;
         }
 
-        public T GetByIdService(string entityId)
+        public ControllerResponseData GetDataById(string entityId)
         {
-            return _baseRepository.GetById(entityId);
+            var data = _baseRepository.GetById(entityId);
+
+            var res = new ControllerResponseData
+            {
+                customStatusCode = (int?)(data == null ? Core.Enum.CustomizeStatusCode.NoContent : Core.Enum.CustomizeStatusCode.GetOkay),
+                responseData = data
+            };
+
+            return res;
         }
 
-        public int InsertService(T entity)
+        public ControllerResponseData InsertData(T entity)
         {
             // Validate data from request
             // 1. General Validations
-            BaseServices<T>.IsEmptyValidation(entity);
-            BaseServices<T>.IsFormatCode(entity);
-            IsDuplicatedValidation(entity, Guid.NewGuid(), false);
-
-            BaseServices<T>.IsGreaterCurrentDate(entity);
-            BaseServices<T>.IsFormatEmail(entity);
+            this.EmptyValidation(entity);
+            this.FormatCodeValidation(entity);
+            this.DuplicatedValidation(entity, Guid.NewGuid(), false);
+            this.GreaterCurrentDateValidation(entity);
+            this.FormatEmailValidation(entity);
 
             // 2. Distinct Validations 
 
             // Everything is Okay!
             // Create a new entityId
-            var properties = entity.GetType().GetProperties();
-            if (properties[0] != null && properties[0].CanWrite)
+            var primaryKeyProp = entity.GetType().GetProperties().Where(
+                prop => Attribute.IsDefined(prop, typeof(PrimaryKey))    
+            );
+
+            foreach (var prop in primaryKeyProp)
             {
-                properties[0].SetValue(entity, Guid.NewGuid());
+                prop.SetValue(entity, Guid.NewGuid());
             }
 
             int rowsEffect = _baseRepository.Insert(entity);
 
-            return rowsEffect;
+            var res = new ControllerResponseData
+            {
+                customStatusCode = (int?)(rowsEffect > 0 ? Core.Enum.CustomizeStatusCode.Created : Core.Enum.CustomizeStatusCode.NoContent),
+                responseData = rowsEffect,
+            };
+
+            return res;
         }
 
-        public int UpdateService(T entity, Guid entityId)
+        public ControllerResponseData UpdateData(T entity, Guid entityId)
         {
             // Validate data from request
             // 1. General Validations
-            BaseServices<T>.IsEmptyValidation(entity);
-            BaseServices<T>.IsFormatCode(entity);
-            IsDuplicatedValidation(entity, entityId, true);
-
-            BaseServices<T>.IsGreaterCurrentDate(entity);
-            BaseServices<T>.IsFormatEmail(entity);
+            this.EmptyValidation(entity);
+            this.FormatCodeValidation(entity);
+            this.DuplicatedValidation(entity, entityId, true);
+            this.GreaterCurrentDateValidation(entity);
+            this.FormatEmailValidation(entity);
 
             // 2. Distinct Validations
 
-            // Everything is Okay!
+            // Everything is Okay
             int rowsEffect = _baseRepository.UpdateById(entity, entityId);
 
-            return rowsEffect;
+            var res = new ControllerResponseData
+            {
+                customStatusCode = (int?)(rowsEffect > 0 ? Core.Enum.CustomizeStatusCode.Updated : Core.Enum.CustomizeStatusCode.NoContent),
+                responseData = rowsEffect,
+            };
+
+            return res;
         }
 
-        public int DeleteService(string entityId)
+        public ControllerResponseData DeleteData(string entityId)
         {
-            return _baseRepository.DeleteById(entityId);
+            int rowsEffect = _baseRepository.DeleteById(entityId);
+
+            var res = new ControllerResponseData
+            {
+                customStatusCode = (int?)(rowsEffect > 0 ? Core.Enum.CustomizeStatusCode.Deleted : Core.Enum.CustomizeStatusCode.NoContent),
+                responseData = rowsEffect,
+            };
+
+            return res;
         }
 
-        public int DeleteMultiService(string[] entityIds)
+        public ControllerResponseData DeleteMultiData(string[] entityIds)
         {
-            return _baseRepository.DeleteMultiById(entityIds);
+            int rowsEffect = _baseRepository.DeleteMultiById(entityIds);
+
+            var res = new ControllerResponseData
+            {
+                customStatusCode = (int?)(rowsEffect > 0 ? Core.Enum.CustomizeStatusCode.Deleted : Core.Enum.CustomizeStatusCode.NoContent),
+                responseData = rowsEffect,
+            };
+
+            return res;
         }
 
         #endregion
@@ -104,10 +150,12 @@ namespace MISA.Fresher.Web12.Core.Services
         /// </summary>
         /// <param name="entity"></param>
         /// <exception cref="MISAValidateException"></exception>
-        private static void IsEmptyValidation(T entity)
+        private void EmptyValidation(T entity)
         {
             // Getting properties marked not allowed Empty
-            var notEmptyProps = entity.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(NotEmpty)));
+            var notEmptyProps = entity.GetType().GetProperties().Where(
+                prop => Attribute.IsDefined(prop, typeof(NotEmpty))
+            );
 
             foreach (var prop in notEmptyProps)
             {
@@ -124,7 +172,14 @@ namespace MISA.Fresher.Web12.Core.Services
 
                 if (propValue == null || string.IsNullOrEmpty(propValue.ToString()))
                 {
+                    // Method 1: Responding messages respectively
                     throw new MISAValidateException(String.Format(Core.Resources.ResourceVietnam.PropNotEmpty, propNameDisplay));
+
+                    // Method 2: Responding all at once
+                    //_listErrMsgs.Add(String.Format(Core.Resources.ResourceVietnam.PropNotEmpty, propNameDisplay));
+
+                    // Method 3: Do not throw Exception
+                    // TODO
                 }
             }
         }
@@ -139,7 +194,7 @@ namespace MISA.Fresher.Web12.Core.Services
         /// <param name="entityId"></param>
         /// <param name="isPut"></param>
         /// <exception cref="MISAValidateException"></exception>
-        private void IsDuplicatedValidation(T entity, Guid entityId, bool isPut)
+        private void DuplicatedValidation(T entity, Guid entityId, bool isPut)
         {
             // Getting properties marked not allowed Duplicated
             var notDuplicatedProps = entity.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(NotDuplicated)));
@@ -159,7 +214,14 @@ namespace MISA.Fresher.Web12.Core.Services
 
                 if (_baseRepository.IsDuplicateCode(propValue.ToString(), entityId.ToString(), isPut))
                 {
+                    // Method 1: Responding messages respectively
                     throw new MISAValidateException(String.Format(Core.Resources.ResourceVietnam.PropNotDuplicated, propNameDisplay));
+
+                    // Method 2: Responding all at once
+                    //_listErrMsgs.Add(String.Format(Core.Resources.ResourceVietnam.PropNotDuplicated, propNameDisplay));
+
+                    // Method 3: Do not throw Exception
+                    // TODO
                 }
             }
         }
@@ -172,7 +234,7 @@ namespace MISA.Fresher.Web12.Core.Services
         /// <param name="code"></param>
         /// <param name="nameDisplay"></param>
         /// <exception cref="MISAValidateException"></exception>
-        private static void IsFormatCode(T entity)
+        private void FormatCodeValidation(T entity)
         {
             // Getting props marked FormatCode
             var formatCodeProps = entity.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(FormatCode)));
@@ -193,10 +255,16 @@ namespace MISA.Fresher.Web12.Core.Services
 
                 if (!regex.IsMatch(propValue.ToString()))
                 {
+                    // Method 1: Responding messages respectively
                     throw new MISAValidateException(String.Format(Core.Resources.ResourceVietnam.WrongFormat, propNameDisplay));
+
+                    // Method 2: Responding all at once
+                    //_listErrMsgs.Add(String.Format(Core.Resources.ResourceVietnam.WrongFormat, propNameDisplay));
+
+                    // Method 3: Do not throw Exception
+                    // TODO
                 }
             }
-            
         }
 
         /// <summary>
@@ -205,7 +273,7 @@ namespace MISA.Fresher.Web12.Core.Services
         /// </summary>
         /// <param name="email"></param>
         /// <exception cref="MISAValidateException"></exception>
-        private static void IsFormatEmail(T entity)
+        private void FormatEmailValidation(T entity)
         {
             // Getting props marked FormatEmail
             var formatEmailProps = entity.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(FormatEmail)));
@@ -221,7 +289,14 @@ namespace MISA.Fresher.Web12.Core.Services
                 {
                     if (!regex.IsMatch(propValue.ToString()))
                     {
+                        // Method 1: Responding messages respectively
                         throw new MISAValidateException(String.Format(Core.Resources.ResourceVietnam.WrongFormat, "Email"));
+
+                        // Method 2: Responding all at once
+                        //_listErrMsgs.Add(String.Format(Core.Resources.ResourceVietnam.WrongFormat, "Email"));
+
+                        // Method 3: Do not throw Exception
+                        // TODO
                     }
                 }
             }
@@ -234,7 +309,7 @@ namespace MISA.Fresher.Web12.Core.Services
         /// <param name="date"></param>
         /// <param name="nameDisplay"></param>
         /// <exception cref="MISAValidateException"></exception>
-        private static void IsGreaterCurrentDate(T entity)
+        private void GreaterCurrentDateValidation(T entity)
         {
             // Getting props marked FormatDate
             var formatDateProps = entity.GetType().GetProperties().Where(property => Attribute.IsDefined(property, typeof(FormatDate)));
@@ -246,7 +321,7 @@ namespace MISA.Fresher.Web12.Core.Services
             {
                 var propValue = prop.GetValue(entity);
 
-                if (propValue != null && !string.IsNullOrEmpty(propValue.ToString())) 
+                if (propValue != null && !string.IsNullOrEmpty(propValue.ToString()))
                 {
                     var propsName = prop.GetCustomAttributes(typeof(PropsName), true);
                     var propNameDisplay = string.Empty;
@@ -257,7 +332,14 @@ namespace MISA.Fresher.Web12.Core.Services
 
                     if ((DateTime)propValue > currentDate)
                     {
+                        // Method 1: Responding messages respectively
                         throw new MISAValidateException(String.Format(Core.Resources.ResourceVietnam.WrongDateFormat, propNameDisplay));
+
+                        // Method 2: Responding all at once
+                        //_listErrMsgs.Add(String.Format(Core.Resources.ResourceVietnam.WrongDateFormat, propNameDisplay));
+
+                        // Method 3: Do not throw Exception
+                        // TODO
                     }
                 }
             }

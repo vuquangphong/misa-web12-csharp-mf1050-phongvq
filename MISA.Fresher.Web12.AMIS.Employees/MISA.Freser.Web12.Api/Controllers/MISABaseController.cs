@@ -23,35 +23,13 @@ namespace MISA.Fresher.Web12.Api.Controllers
 
         #endregion
 
-        #region Support Method
-
-        /// <summary>
-        /// @desc: Catching Exceptions from Server Errors
-        /// @author: VQPhong (28/01/2022)
-        /// </summary>
-        /// <param name="ex"></param>
-        /// <returns>
-        /// Status Code 500
-        /// </returns>
-        protected IActionResult CatchException(Exception ex)
-        {
-            var res = new
-            {
-                devMsg = ex.Message,
-                userMsg = Core.Resources.ResourceVietnam.UserMsgServerError,
-            };
-            return StatusCode(500, res);
-        }
-
-        #endregion
-
         #region Main Controllers
 
         /// <summary>
         /// @method: GET /Entities
         /// @desc: Get the Info of all Entities
         /// @author: VQPhong (28/01/2022)
-        /// @modified: VQPhong (03/06/2022)
+        /// @modified: VQPhong (20/06/2022)
         /// </summary>
         /// <returns>
         /// An array of Entities
@@ -59,27 +37,15 @@ namespace MISA.Fresher.Web12.Api.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            try
-            {
-                var entities = _baseServices.GetAllService();
-
-                if (entities  == null || entities?.Count() == 0)
-                {
-                    return NoContent();
-                }
-                return Ok(entities);
-            }
-            catch (Exception ex)
-            {
-                return CatchException(ex);
-            }
-
+            var res = _baseServices.GetAllData();
+            return Ok(res);
         }
 
         /// <summary>
         /// @method: GET /Entities/{entityId}
         /// @desc: Get the Info of an Entity by Id
-        /// @author: Vũ Quang Phong (28/01/2022)
+        /// @author: VQPhong (28/01/2022)
+        /// @modified: VQPhong (24/06/2022)
         /// </summary>
         /// <param name="entityId"></param>
         /// <returns>
@@ -88,27 +54,14 @@ namespace MISA.Fresher.Web12.Api.Controllers
         [HttpGet("{entityId}")]
         public IActionResult Get(string entityId)
         {
-            try
-            {
-                var entity = _baseServices.GetByIdService(entityId);
-
-                if (entity == null)
-                {
-                    return NoContent();
-                }
-                return Ok(entity);
-            }
-            catch (Exception ex)
-            {
-                return CatchException(ex);
-            }
-
+            var res = _baseServices.GetDataById(entityId);
+            return Ok(res);
         }
 
         /// <summary>
         /// @method: POST /Entities
         /// @desc: Insert a new Entity into Database
-        /// @author: Vũ Quang Phong (28/01/2022)
+        /// @author: VQPhong (28/01/2022)
         /// </summary>
         /// <param name="entity"></param>
         /// <returns>
@@ -117,29 +70,8 @@ namespace MISA.Fresher.Web12.Api.Controllers
         [HttpPost]
         public IActionResult Post(T entity)
         {
-            try
-            {
-                var rowsEffect = _baseServices.InsertService(entity);
-
-                if (rowsEffect > 0)
-                {
-                    return StatusCode(201, entity);
-                }
-                return StatusCode(204);
-            }
-            catch (MISAValidateException ex)
-            {
-                var res = new
-                {
-                    devMsg = ex.Message,
-                    userMsg = ex.Message,
-                };
-                return BadRequest(res);
-            }
-            catch (Exception ex)
-            {
-                return CatchException(ex);
-            }
+            var res = _baseServices.InsertData(entity);
+            return Ok(res);
         }
 
         /// <summary>
@@ -155,29 +87,8 @@ namespace MISA.Fresher.Web12.Api.Controllers
         [HttpPut("{entityId}")]
         public IActionResult Put(T entity, Guid entityId)
         {
-            try
-            {
-                var rowsEffect = _baseServices.UpdateService(entity, entityId);
-
-                if (rowsEffect > 0)
-                {
-                    return StatusCode(201, rowsEffect);
-                }
-                return StatusCode(204);
-            }
-            catch (MISAValidateException ex)
-            {
-                var res = new
-                {
-                    devMsg = ex.Message,
-                    userMsg = ex.Message,
-                };
-                return BadRequest(res);
-            }
-            catch (Exception ex)
-            {
-                return CatchException(ex);
-            }
+            var res = _baseServices.UpdateData(entity, entityId);
+            return Ok(res);
         }
 
         /// <summary>
@@ -192,20 +103,8 @@ namespace MISA.Fresher.Web12.Api.Controllers
         [HttpDelete("{entityId}")]
         public IActionResult Delete(string entityId)
         {
-            try
-            {
-                var rowsEffect = _baseServices.DeleteService(entityId);
-
-                if (rowsEffect > 0)
-                {
-                    return Ok(rowsEffect);
-                }
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return CatchException(ex);
-            }
+            var res = _baseServices.DeleteData(entityId);
+            return Ok(res);
         }
 
         /// <summary>
@@ -220,20 +119,9 @@ namespace MISA.Fresher.Web12.Api.Controllers
         [HttpPatch]
         public IActionResult DeleteMulti(string[] entityIds)
         {
-            try
-            {
-                var rowsEffect = _baseServices.DeleteMultiService(entityIds);
 
-                if (rowsEffect > 0)
-                {
-                    return Ok(rowsEffect);
-                }
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return CatchException(ex);
-            }
+            var res = _baseServices.DeleteMultiData(entityIds);
+            return Ok(res);
         }
 
         #endregion

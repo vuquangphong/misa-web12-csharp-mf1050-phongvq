@@ -10,6 +10,7 @@ namespace MISA.Fresher.Web12.Core.Entities
     public class Department
     {
         // Primary Key
+        [PrimaryKey]
         public Guid? DepartmentId { get; set; }
 
         // Department Code

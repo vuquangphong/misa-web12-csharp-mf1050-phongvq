@@ -1,3 +1,4 @@
+using MISA.Fresher.Web12.Core.Exceptions;
 using MISA.Fresher.Web12.Core.Interfaces.Infrastructure;
 using MISA.Fresher.Web12.Core.Interfaces.Services;
 using MISA.Fresher.Web12.Core.Services;
@@ -9,6 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+// [Middleware] Exception Handler (14/06/2022)
+builder.Services.AddControllers(option =>
+{
+    option.Filters.Add<HttpResponseExceptionFilter>();
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

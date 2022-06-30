@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MISA.Fresher.Web12.Core.OtherModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,65 +10,69 @@ namespace MISA.Fresher.Web12.Core.Interfaces.Services
     public interface IBaseServices<T>
     {
         /// <summary>
-        /// @author: Vũ Quang Phong (14/02/2022)
+        /// @author: VQPhong (14/02/2022)
+        /// @modified: VQPhong (20/06/2022)
         /// @desc: The Service of GetAll
         /// </summary>
         /// <returns>
-        /// A list of Entities
+        /// A model of ControllerResponseData
         /// </returns>
-        public IEnumerable<T> GetAllService();
+        public ControllerResponseData GetAllData();
 
         /// <summary>
-        /// @author: Vũ Quang Phong (14/02/2022)
+        /// @author: VQPhong (14/02/2022)
+        /// @modified: VQPhong (24/06/2022)
         /// @desc: The service of Get by Id
         /// </summary>
         /// <param name="entityId"></param>
         /// <returns>
-        /// An Entity
+        /// A model of ControllerResponseData
         /// </returns>
-        public T GetByIdService(string entityId);
+        public ControllerResponseData GetDataById(string entityId);
 
         /// <summary>
-        /// @author: Vũ Quang Phong (24/01/2022)
+        /// @author: VQPhong (24/01/2022)
         /// @desc: The Service for Adding a new Entity
-        /// @edited: Vũ Quang Phong (26/01/2022)
+        /// @modified: VQPhong (24/06/2022)
         /// </summary>
         /// <param name="entity"></param>
         /// <returns>
-        /// Number of rows that are affected
+        /// A model of ControllerResponseData
         /// </returns>
-        public int InsertService(T entity);
+        public ControllerResponseData InsertData(T entity);
 
         /// <summary>
-        /// @author: Vũ Quang Phong (24/01/2022)
+        /// @author: VQPhong (24/01/2022)
         /// @desc: The Service for Updating an Entity
-        /// @edited: Vũ Quang Phong (26/01/2022)
+        /// @modified: VQPhong (24/06/2022)
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="entityId"></param>
         /// <returns>
-        /// Number of rows that are affected
+        /// A model of ControllerResponseData
         /// </returns>
-        public int UpdateService(T entity, Guid entityId);
+        public ControllerResponseData UpdateData(T entity, Guid entityId);
 
         /// <summary>
-        /// @author: Vũ Quang Phong (14/02/2022)
+        /// @author: VQPhong (14/02/2022)
         /// @desc: The Service of Removing an Entity by Id
+        /// @modified: VQPhong (24/06/2022)
         /// </summary>
         /// <param name="entityId"></param>
         /// <returns>
-        /// Number of rows affected
+        /// A model of ControllerResponseData
         /// </returns>
-        public int DeleteService(string entityId);
+        public ControllerResponseData DeleteData(string entityId);
 
         /// <summary>
-        /// @author: Vũ Quang Phong (14/02/2022)
+        /// @author: VQPhong (14/02/2022)
+        /// @modified: VQPhong (24/06/2022)
         /// @desc: The Service of Removing multiple Entities by an array Ids
         /// </summary>
         /// <param name="entityIds"></param>
         /// <returns>
-        /// Number of Rows affected
+        /// A model of ControllerResponseData
         /// </returns>
-        public int DeleteMultiService(string[] entityIds);
+        public ControllerResponseData DeleteMultiData(string[] entityIds);
     }
 }
